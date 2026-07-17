@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="transition-theme">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VoltFix - Educational Appliance Care & Safety Guides</title>
+  <meta name="description" content="Discover DIY appliance diagnostic tips, safety checklists, and maintenance instructions. Learn how to extend the lifespan of fans, irons, mixers, and geysers.">
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            heading: ['Outfit', 'sans-serif'],
+          },
+          colors: {
+            slate: {
+              350: '#cbd5e1',
+              450: '#94a3b8',
+              650: '#475569',
+              750: '#334155',
+              805: '#1e293b',
+              808: '#1e293b',
+              850: '#1e293b',
+            },
+            indigo: {
+              150: '#e0e7ff',
+              650: '#4338ca',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-100 min-h-screen flex flex-col transition-theme">
+
+  <!-- Header (Common) -->
+  <header class="sticky top-0 z-50 w-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-theme">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="index.html" class="flex items-center space-x-2 group">
+        <div class="w-10 h-10 bg-indigo-600 text-white rounded-lg flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+        </div>
+        <span class="text-xl font-bold font-heading tracking-tight bg-gradient-to-r from-indigo-600 to-blue-500 bg-clip-text text-transparent dark:from-indigo-400 dark:to-blue-400">VoltFix</span>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex items-center space-x-8 font-medium">
+        <div class="relative">
+          <button id="home-dropdown-btn" class="flex items-center space-x-1 text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 focus:outline-none">
+            <span>Home</span>
+            <i class="fa-solid fa-chevron-down text-xs transition-transform duration-200"></i>
+          </button>
+          <div id="home-dropdown-menu" class="hidden absolute top-full left-0 mt-2 w-48 bg-white dark:bg-slate-850 rounded-lg shadow-xl border border-slate-200 dark:border-slate-750 py-2 opacity-0 translate-y-2 transition-all z-50">
+            <a href="index.html" class="block px-4 py-2 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">Home 1</a>
+            <a href="home2.html" class="block px-4 py-2 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">Home 2</a>
+          </div>
+        </div>
+        <a href="about.html" class="text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400">About</a>
+        <a href="services.html" class="text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400">Services</a>
+        <a href="pricing.html" class="text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400">Pricing</a>
+        <a href="guides.html" class="text-indigo-600 dark:text-indigo-400">Repair Guides</a>
+        <a href="contact.html" class="text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400">Contact</a>
+      </nav>
+
+      <!-- Right Utility Actions -->
+      <div class="flex items-center space-x-3">
+
+        <!-- RTL/LTR Toggle -->
+        <button id="rtl-toggle" class="w-12 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-700 transition-theme focus:outline-none font-bold text-xs">
+          <span id="rtl-text">LTR</span>
+        </button>
+
+        <!-- Mobile Menu Btn -->
+        <button id="mobile-menu-btn" class="md:hidden w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-700 transition-theme focus:outline-none">
+          <i class="fa-solid fa-bars text-lg text-slate-700 dark:text-slate-200"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div id="mobile-drawer-overlay" class="hidden fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50"></div>
+  <div id="mobile-drawer" class="fixed top-0 right-0 bottom-0 w-80 bg-white dark:bg-slate-900 max-w-full shadow-2xl z-50 transform translate-x-full transition-transform duration-300 border-l border-slate-200 dark:border-slate-800 p-6 flex flex-col justify-between">
+    <div>
+      <div class="flex items-center justify-between pb-6 border-b border-slate-200 dark:border-slate-800">
+        <span class="text-lg font-bold font-heading text-indigo-600 dark:text-indigo-400">VoltFix Nav Menu</span>
+        <button id="mobile-menu-close-btn" class="w-8 h-8 rounded-full flex items-center justify-center bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700">
+          <i class="fa-solid fa-xmark text-slate-650 dark:text-slate-350"></i>
+        </button>
+      </div>
+      <div class="flex flex-col py-6 space-y-2 font-medium">
+        <!-- Home Accordion -->
+        <div>
+          <button id="mobile-home-acc-btn" class="flex items-center justify-between w-full text-left text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 py-2 min-h-0 bg-transparent border-0 p-0 focus:outline-none">
+            <span>Home</span>
+            <i id="mobile-home-acc-icon" class="fa-solid fa-chevron-right text-xs transition-transform duration-200"></i>
+          </button>
+          <div id="mobile-home-acc-sub" class="hidden flex-col pl-3 mt-1 pb-1 space-y-1 border-l-2 border-slate-200 dark:border-slate-700">
+            <a href="index.html" class="text-sm text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 py-1.5 block">Home 1</a>
+            <a href="home2.html" class="text-sm text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 py-1.5 block">Home 2</a>
+          </div>
+        </div>
+        <a href="about.html" class="text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 py-2">About Us</a>
+        <a href="services.html" class="text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 py-2">Our Services</a>
+        <a href="pricing.html" class="text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 py-2">Pricing</a>
+        <a href="guides.html" class="text-indigo-600 dark:text-indigo-400 font-semibold py-2">Repair Guides</a>
+        <a href="contact.html" class="text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 py-2">Contact Us</a>
+        <!-- Appearance Toggles -->
+        <div class="flex items-center gap-3 pt-3 mt-1 border-t border-slate-200 dark:border-slate-800">
+          <button id="mobile-theme-btn" onclick="document.getElementById('theme-toggle').click()" class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-700 transition-theme min-h-0" title="Toggle Theme">
+          </button>
+          <button onclick="document.getElementById('rtl-toggle').click()" class="w-12 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-700 transition-theme font-bold text-xs text-slate-700 dark:text-slate-200 min-h-0">
+            <span id="mobile-rtl-text">LTR</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="pt-6 border-t border-slate-200 dark:border-slate-800">
+      <p class="text-xs text-slate-400 text-center">&copy; 2026 VoltFix Repairs. All rights reserved.</p>
+    </div>
+  </div>
+
+  <!-- Main Content - Repair Guides (6 Sections) -->
+  <main class="flex-grow">
+
+    <!-- Section 1: Centered Hero (no image) -->
+    <section class="bg-gradient-to-br from-indigo-950 via-slate-900 to-indigo-900 text-white py-14 sm:py-24 relative overflow-hidden transition-theme">
+      <!-- Decorative background rings -->
+      <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full border border-indigo-500/10"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full border border-indigo-500/15"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] rounded-full bg-indigo-600/10"></div>
+      </div>
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-4 sm:space-y-6">
+        <span class="bg-indigo-500/20 border border-indigo-500/30 px-4 py-1.5 rounded-full text-indigo-300 font-bold text-xs uppercase tracking-widest inline-block">VoltFix Knowledge Hub</span>
+        <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold font-heading tracking-tight leading-tight">
+          Appliance Care &amp; <br class="hidden sm:inline">
+          <span class="bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">Repair Guides</span>
+        </h1>
+        <p class="text-slate-350 text-base max-w-xl mx-auto leading-relaxed">
+          Expert-written diagnostic guides, safety checklists, and DIY maintenance tips to help you extend the life of your fans, irons, mixers, and geysers.
+        </p>
+        <div class="flex flex-wrap items-center justify-center gap-6 pt-2 text-slate-400 text-xs">
+          <div class="flex items-center gap-2"><i class="fa-solid fa-book-open text-indigo-400"></i> <span>24+ Guides Published</span></div>
+          <div class="flex items-center gap-2"><i class="fa-solid fa-users text-indigo-400"></i> <span>5,000+ Monthly Readers</span></div>
+          <div class="flex items-center gap-2"><i class="fa-solid fa-shield-halved text-indigo-400"></i> <span>Certified Technicians</span></div>
+        </div>
+        <a href="#articles" class="inline-flex items-center gap-2 px-7 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-lg shadow-lg hover:shadow-indigo-500/30 transition-all">
+          Browse All Guides <i class="fa-solid fa-arrow-down text-xs"></i>
+        </a>
+      </div>
+    </section>
+
+    <!-- Section 2: Interactive Search & Filter Bar -->
+    <section class="py-10 bg-slate-100 dark:bg-slate-850 border-y border-slate-200 dark:border-slate-800 transition-theme" id="articles">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row gap-6 items-center justify-between">
+        
+        <!-- Filter Category Tabs -->
+        <div class="flex flex-wrap gap-2">
+          <button onclick="filterArticles('All')" class="article-tag active px-4 py-1.5 rounded-full text-xs font-semibold bg-indigo-600 text-white border border-indigo-500 transition-all">All Guides</button>
+          <button onclick="filterArticles('Appliance Maintenance')" class="article-tag px-4 py-1.5 rounded-full text-xs font-semibold border border-slate-300 dark:border-slate-700 hover:border-indigo-400 text-slate-650 dark:text-slate-300 transition-all">Maintenance</button>
+          <button onclick="filterArticles('DIY Fixes')" class="article-tag px-4 py-1.5 rounded-full text-xs font-semibold border border-slate-300 dark:border-slate-700 hover:border-indigo-400 text-slate-650 dark:text-slate-300 transition-all">DIY Fixes</button>
+          <button onclick="filterArticles('Safety Tips')" class="article-tag px-4 py-1.5 rounded-full text-xs font-semibold border border-slate-300 dark:border-slate-700 hover:border-indigo-400 text-slate-650 dark:text-slate-300 transition-all">Safety Tips</button>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="w-full md:max-w-xs flex items-center bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg p-1.5 shadow-sm">
+          <i class="fa-solid fa-magnifying-glass text-slate-400 ml-2 mr-1"></i>
+          <input id="article-search" type="text" placeholder="Search guides..." class="w-full bg-transparent border-none focus:outline-none text-xs p-1 dark:text-white">
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Section 3: Article Grid (icon-based, no image) -->
+    <section class="py-14 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div id="articles-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8">
+        <!-- Rendered Dynamically via JS -->
+      </div>
+      <div id="no-articles" class="hidden text-center py-16 text-slate-500 space-y-3">
+        <i class="fa-solid fa-folder-open text-4xl"></i>
+        <h4 class="font-bold text-lg">No Matching Care Guides Found</h4>
+        <p class="text-sm">Refine your search parameters or select a different tag filter.</p>
+      </div>
+    </section>
+
+    <!-- Section 4: Appliance Lifespan Table -->
+    <section class="py-14 sm:py-20 bg-slate-100 dark:bg-slate-850 transition-theme">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6">
+        <div class="bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-md">
+          <div class="text-center max-w-md mx-auto mb-6 sm:mb-8">
+            <div class="w-12 h-12 bg-indigo-100 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-400 rounded-xl flex items-center justify-center text-xl mx-auto mb-4">
+              <i class="fa-solid fa-clock-rotate-left"></i>
+            </div>
+            <h2 class="text-xl sm:text-2xl md:text-3xl font-extrabold font-heading dark:text-white">Appliance Lifespan Expectancy</h2>
+            <p class="text-slate-650 dark:text-slate-350 text-sm mt-2">Average lifespan metrics and key guidelines to double their operational utility.</p>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm text-left">
+              <thead class="text-xs text-slate-450 uppercase border-b border-slate-200 dark:border-slate-800">
+                <tr>
+                  <th class="py-3">Appliance</th>
+                  <th class="py-3 text-center">Avg Lifespan</th>
+                  <th class="py-3">Maintenance Guideline</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 dark:divide-slate-800 text-slate-700 dark:text-slate-300">
+                <tr class="hover:bg-slate-50 dark:hover:bg-slate-850/50 transition-colors">
+                  <td class="py-4 font-bold"><i class="fa-solid fa-wind mr-1.5 text-indigo-500"></i> Ceiling &amp; Exhaust Fans</td>
+                  <td class="py-4 text-center"><span class="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 rounded-full font-bold text-xs">10 Years</span></td>
+                  <td class="py-4 text-xs text-slate-650 dark:text-slate-350">Clean motor blades yearly; replace humming run capacitors immediately to prevent stator heat burnouts.</td>
+                </tr>
+                <tr class="hover:bg-slate-50 dark:hover:bg-slate-850/50 transition-colors">
+                  <td class="py-4 font-bold"><i class="fa-solid fa-shirt mr-1.5 text-indigo-500"></i> Steam &amp; Dry Irons</td>
+                  <td class="py-4 text-center"><span class="px-3 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 rounded-full font-bold text-xs">5 Years</span></td>
+                  <td class="py-4 text-xs text-slate-650 dark:text-slate-350">Flush inner reservoirs using descaling solution every 6 months to prevent mineral scale deposits.</td>
+                </tr>
+                <tr class="hover:bg-slate-50 dark:hover:bg-slate-850/50 transition-colors">
+                  <td class="py-4 font-bold"><i class="fa-solid fa-blender mr-1.5 text-indigo-500"></i> Kitchen Mixer Grinders</td>
+                  <td class="py-4 text-center"><span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 rounded-full font-bold text-xs">8 Years</span></td>
+                  <td class="py-4 text-xs text-slate-650 dark:text-slate-350">Never run continuously past 5 minutes; check overload cutoff button under chassis before restarting stalled blades.</td>
+                </tr>
+                <tr class="hover:bg-slate-50 dark:hover:bg-slate-850/50 transition-colors">
+                  <td class="py-4 font-bold"><i class="fa-solid fa-hot-tub-person mr-1.5 text-indigo-500"></i> Hot Water Geysers</td>
+                  <td class="py-4 text-center"><span class="px-3 py-1 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-400 rounded-full font-bold text-xs">12 Years</span></td>
+                  <td class="py-4 text-xs text-slate-650 dark:text-slate-350">Replace magnesium sacrificial anode rods every 3 years; execute total flush descaling cycles every 12 months.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5: Interactive Pre-Repair Safe Checklist -->
+    <section class="py-20 max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="bg-indigo-600 dark:bg-indigo-950/40 text-white dark:text-slate-100 rounded-2xl p-8 border border-indigo-500/20 shadow-xl relative overflow-hidden">
+        <div class="absolute -right-12 -bottom-12 w-40 h-40 bg-white/10 rounded-full pointer-events-none"></div>
+        <div class="max-w-2xl mx-auto text-center space-y-6">
+          <div class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center text-xl mx-auto mb-2 text-white">
+            <i class="fa-solid fa-clipboard-list"></i>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold font-heading text-white">DIY Safe-Handling Checklist</h2>
+          <p class="text-sm text-indigo-100 dark:text-slate-350 max-w-md mx-auto">Always complete these 4 simple checkpoints before opening or investigating any electrical appliance at home.</p>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-left mt-6">
+            <div class="p-4 bg-slate-900/40 dark:bg-slate-900/60 rounded-xl border border-indigo-400/20 flex items-start space-x-3 rtl:space-x-reverse">
+              <input type="checkbox" id="check-1" class="mt-1 w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500">
+              <label for="check-1" class="text-xs leading-relaxed select-none text-slate-200">
+                <strong class="block text-sm text-white mb-0.5">1. Complete Isolation</strong>
+                Verify that the plug is pulled from the socket and the circuit breaker switch is Off.
+              </label>
+            </div>
+            <div class="p-4 bg-slate-900/40 dark:bg-slate-900/60 rounded-xl border border-indigo-400/20 flex items-start space-x-3 rtl:space-x-reverse">
+              <input type="checkbox" id="check-2" class="mt-1 w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500">
+              <label for="check-2" class="text-xs leading-relaxed select-none text-slate-200">
+                <strong class="block text-sm text-white mb-0.5">2. Moisture Check</strong>
+                Ensure your hands, clothing, tools, and the floor surrounding the unit are completely dry.
+              </label>
+            </div>
+            <div class="p-4 bg-slate-900/40 dark:bg-slate-900/60 rounded-xl border border-indigo-400/20 flex items-start space-x-3 rtl:space-x-reverse">
+              <input type="checkbox" id="check-3" class="mt-1 w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500">
+              <label for="check-3" class="text-xs leading-relaxed select-none text-slate-200">
+                <strong class="block text-sm text-white mb-0.5">3. Capacitor Discharge</strong>
+                For fans or motor components, wait 10+ minutes or discharge capacitors to avoid stored shock.
+              </label>
+            </div>
+            <div class="p-4 bg-slate-900/40 dark:bg-slate-900/60 rounded-xl border border-indigo-400/20 flex items-start space-x-3 rtl:space-x-reverse">
+              <input type="checkbox" id="check-4" class="mt-1 w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500">
+              <label for="check-4" class="text-xs leading-relaxed select-none text-slate-200">
+                <strong class="block text-sm text-white mb-0.5">4. Safe Documentation</strong>
+                Take photos of the wiring arrangement before disconnecting any internal terminals.
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 6: Technician FAQ Accordion -->
+    <section class="py-20 bg-slate-50 dark:bg-slate-900 transition-theme border-t border-slate-200 dark:border-slate-800">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6">
+        <div class="text-center max-w-md mx-auto mb-10">
+          <div class="w-12 h-12 bg-indigo-100 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-400 rounded-xl flex items-center justify-center text-xl mx-auto mb-4">
+            <i class="fa-solid fa-circle-question"></i>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold font-heading dark:text-white">Technician Advice FAQs</h2>
+          <p class="text-slate-650 dark:text-slate-350 text-sm mt-2">Answers to key care questions asked by our clients during diagnostics.</p>
+        </div>
+
+        <div class="space-y-4">
+          <div class="bg-white dark:bg-slate-850 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+            <h3 class="font-bold text-sm text-slate-900 dark:text-white mb-2 flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-indigo-500"></span>
+              Is it safe to rewind a ceiling fan motor myself?
+            </h3>
+            <p class="text-xs text-slate-650 dark:text-slate-350 leading-relaxed pl-4">
+              We strongly advise against DIY rewinding. Motor windings require calibrated wire tension and electrical varnish coating to avoid internal short circuits. A poorly wound stator poses severe fire hazards.
+            </p>
+          </div>
+          <div class="bg-white dark:bg-slate-850 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+            <h3 class="font-bold text-sm text-slate-900 dark:text-white mb-2 flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-indigo-500"></span>
+              How often should I descale my steam iron?
+            </h3>
+            <p class="text-xs text-slate-650 dark:text-slate-350 leading-relaxed pl-4">
+              If you use normal tap water, we recommend descaling every 4 to 6 months. If you use distilled water, once a year is sufficient to prevent steam nozzle blockage.
+            </p>
+          </div>
+          <div class="bg-white dark:bg-slate-850 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+            <h3 class="font-bold text-sm text-slate-900 dark:text-white mb-2 flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-indigo-500"></span>
+              Why does my geyser make a loud rumbling sound?
+            </h3>
+            <p class="text-xs text-slate-650 dark:text-slate-350 leading-relaxed pl-4">
+              Loud rumbling or knocking is a sign of severe sediment build-up. As water gets trapped beneath the mineral crust at the bottom, it boils and bursts out, making popping noises. A full flush and descaling is required.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer (Common) -->
+  <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800 transition-theme">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div class="space-y-4">
+        <a href="index.html" class="flex items-center space-x-2 group">
+          <div class="w-10 h-10 bg-indigo-600 text-white rounded-lg flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+          </div>
+          <span class="text-xl font-bold font-heading tracking-tight bg-gradient-to-r from-indigo-600 to-blue-500 bg-clip-text text-transparent dark:from-indigo-400 dark:to-blue-400">VoltFix</span>
+        </a>
+        <p class="text-xs text-slate-500">Premium local electrical diagnostic and repair center for ceiling fans, irons, mixers, and geysers. Fast turnaround, transparent pricing.</p>
+        <div class="flex space-x-3 text-slate-500">
+          <a href="#" class="hover:text-indigo-400"><i class="fa-brands fa-facebook"></i></a>
+          <a href="#" class="hover:text-indigo-400"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#" class="hover:text-indigo-400"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="hover:text-indigo-400"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+      <div>
+        <h4 class="font-bold text-white mb-4 font-heading">Navigation</h4>
+        <ul class="space-y-2 text-sm">
+          <li><a href="index.html" class="hover:text-indigo-400">General Landing</a></li>
+          <li><a href="home2.html" class="hover:text-indigo-400">Subscription SaaS</a></li>
+          <li><a href="about.html" class="hover:text-indigo-400">About Us</a></li>
+          <li><a href="services.html" class="hover:text-indigo-400">Services</a></li>
+          <li><a href="guides.html" class="hover:text-indigo-400">Repair Guides</a></li>
+          <li><a href="contact.html" class="hover:text-indigo-400">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-bold text-white mb-4 font-heading">Services</h4>
+        <ul class="space-y-2 text-sm">
+          <li><a href="service-details.html" class="hover:text-indigo-400">Ceiling Fan Repair</a></li>
+          <li><a href="service-details.html" class="hover:text-indigo-400">Steam Iron Descaling</a></li>
+          <li><a href="service-details.html" class="hover:text-indigo-400">Mixer Motor Rewinding</a></li>
+          <li><a href="service-details.html" class="hover:text-indigo-400">Geyser Element Swap</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-bold text-white mb-4 font-heading">Operating Hours</h4>
+        <ul class="space-y-2 text-xs">
+          <li>Monday - Friday: <span class="text-slate-300">8:00 AM - 7:00 PM</span></li>
+          <li>Saturday: <span class="text-slate-300">9:00 AM - 5:00 PM</span></li>
+          <li>Sunday: <span class="text-red-400 font-semibold">Closed for Safety Audits</span></li>
+          <li class="pt-2 text-slate-500"><i class="fa-solid fa-location-dot mr-1"></i> 101 Spark Ave, Suite B, Electropolis</li>
+        </ul>
+      </div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-slate-800 mt-8 pt-8 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500">
+      <p>&copy; 2026 VoltFix Appliance Repairs. Crafted with electrical precision.</p>
+      <div class="flex space-x-4 mt-4 sm:mt-0">
+        <a href="#" class="hover:text-indigo-400">Privacy Policy</a>
+        <a href="#" class="hover:text-indigo-400">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- App Data & Logic -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  
+  <!-- Articles render script -->
+  <script>
+    const searchInput = document.getElementById("article-search");
+    const articlesGrid = document.getElementById("articles-grid");
+    const noArticles = document.getElementById("no-articles");
+
+    let currentCategory = "All";
+    let searchQuery = "";
+
+    function renderArticles() {
+      const filtered = articlesData.filter(article => {
+        const matchesCategory = currentCategory === "All" || article.category === currentCategory;
+        const matchesSearch = article.title.toLowerCase().includes(searchQuery) ||
+                              article.summary.toLowerCase().includes(searchQuery) ||
+                              article.tags.some(tag => tag.toLowerCase().includes(searchQuery));
+        return matchesCategory && matchesSearch;
+      });
+
+      articlesGrid.innerHTML = "";
+
+      if (filtered.length === 0) {
+        noArticles.classList.remove("hidden");
+      } else {
+        noArticles.classList.add("hidden");
+        filtered.forEach(article => {
+          let iconClass = "fa-book";
+          if (article.category === "Appliance Maintenance") {
+            iconClass = "fa-screwdriver-wrench";
+          } else if (article.category === "DIY Fixes") {
+            iconClass = "fa-lightbulb";
+          } else if (article.category === "Safety Tips") {
+            iconClass = "fa-shield-halved";
+          }
+
+          const cardHtml = `
+            <div class="bg-white dark:bg-slate-850 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl transition-all flex flex-col justify-between group">
+              <div>
+                <div class="w-12 h-12 bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400 rounded-xl flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                  <i class="fa-solid ${iconClass}"></i>
+                </div>
+                <div class="flex justify-between items-center text-[10px] text-slate-400 mb-2">
+                  <span class="font-bold text-indigo-650 dark:text-indigo-400 uppercase tracking-wider">${article.category}</span>
+                  <span>${article.readTime}</span>
+                </div>
+                <h3 class="font-bold font-heading dark:text-white text-base mb-2 hover:text-indigo-650 transition-colors">${article.title}</h3>
+                <p class="text-xs text-slate-650 dark:text-slate-350 line-clamp-3 mb-6">${article.summary}</p>
+              </div>
+              <div class="border-t border-slate-100 dark:border-slate-800 pt-4 flex justify-between items-center">
+                <span class="text-[10px] text-slate-450">By ${article.author.split(",")[0]}</span>
+                <a href="guide-details.html" class="text-xs font-bold text-indigo-650 dark:text-indigo-400 flex items-center space-x-1 hover:underline">
+                  <span>Read Article</span>
+                  <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                </a>
+              </div>
+            </div>
+          `;
+          articlesGrid.insertAdjacentHTML("beforeend", cardHtml);
+        });
+      }
+    }
+
+    function filterArticles(category) {
+      currentCategory = category;
+      const tags = document.querySelectorAll(".article-tag");
+      tags.forEach(tag => {
+        if (tag.textContent.trim().includes(category)) {
+          tag.classList.add("bg-indigo-600", "text-white", "border-indigo-500");
+          tag.classList.remove("text-slate-650", "dark:text-slate-300", "border-slate-300", "dark:border-slate-700");
+        } else {
+          tag.classList.remove("bg-indigo-600", "text-white", "border-indigo-500");
+          tag.classList.add("text-slate-650", "dark:text-slate-300", "border-slate-300", "dark:border-slate-700");
+        }
+      });
+      renderArticles();
+    }
+
+    searchInput.addEventListener("input", (e) => {
+      searchQuery = e.target.value.toLowerCase().trim();
+      renderArticles();
+    });
+
+    // Diagnostic quiz actions
+    const diagnosticOutput = document.getElementById("diagnostic-output");
+    const diagTitle = document.getElementById("diag-title");
+    const diagDesc = document.getElementById("diag-desc");
+    const diagAction = document.getElementById("diag-action");
+
+    function diagnose(appliance) {
+      diagnosticOutput.classList.remove("hidden");
+      if (appliance === 'mixer') {
+        diagTitle.textContent = "Symptom: Food Mixer Coupler Will Not Spin";
+        diagDesc.textContent = "If the motor hums when turned on but the blades do not spin, the drive coupler teeth are likely worn down or stripped. Continuing to run the motor will trigger armature burnout.";
+        diagAction.textContent = "Check if the motor output shaft has black rubber residues. If yes, unplug the mixer, remove the jar, and schedule a coupler replacement ticket ($25).";
+      } else if (appliance === 'geyser') {
+        diagTitle.textContent = "Symptom: Geyser Trips Mains Board Breaker";
+        diagDesc.textContent = "Breaker trips usually happen when water leaks into the heating coil cavity, causing a dead short circuit to ground casing. This is a severe safety hazard.";
+        diagAction.textContent = "Immediately switch off the dedicated geyser DP switch at the breaker panel. Do NOT touch the geyser casing. Schedule an express home technician dispatch ($39).";
+      } else if (appliance === 'fan') {
+        diagTitle.textContent = "Symptom: Ceiling Fan Rotates Sluggishly";
+        diagDesc.textContent = "A sluggish ceiling fan that hums but needs a push to start is caused by a weakened run capacitor (normally 2.5uF). Bearings may also be dusty.";
+        diagAction.textContent = "Unplug power lines. Use a non-conductive capacitor tool to discharge terminals. Replace the old capacitor with a fresh CE-approved component ($19).";
+      }
+    }
+
+    // Newsletter submit
+    const newsletterForm = document.getElementById("newsletter-form");
+    if (newsletterForm) {
+      newsletterForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        newsletterForm.classList.add("hidden");
+        const newsletterSuccess = document.getElementById("newsletter-success");
+        if (newsletterSuccess) newsletterSuccess.classList.remove("hidden");
+      });
+    }
+
+    // Initial run
+    renderArticles();
+  </script>
+</body>
+</html>

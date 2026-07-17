@@ -1,0 +1,1 @@
+Static multi-page marketing site for a local electrical appliance repair business, offering service listings, DIY guides, pricing, and a booking form with dark mode and RTL support.

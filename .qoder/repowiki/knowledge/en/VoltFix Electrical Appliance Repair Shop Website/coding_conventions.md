@@ -1,0 +1,5 @@
+- Global UI features (theme, direction, dropdowns, mobile drawer) are exposed as named functions (`initTheme`, `applyTheme`, `initDirection`, `applyDirection`, `initDropdowns`, `initMobileMenu`) invoked from a single `DOMContentLoaded` bootstrap in app.js.
+- User preferences persist in `localStorage` under the `voltfix-` namespace (`voltfix-theme`, `voltfix-dir`) and are read back on load to restore state.
+- Mock content is kept in a separate `data.js` module as plain arrays of objects (`servicesData`, `articlesData`, `coverageZipCodes`, `faqsData`) and imported before `app.js` so pages can render lists without inline duplication.
+- Dark-mode styling is applied by toggling the `dark` class on `<html>` and pairing every light token with its `dark:` counterpart throughout the HTML markup.
+- RTL support is achieved by toggling `dir="rtl"` on `<html>` plus a `rtl-mode` class, and using Tailwind's logical spacing utilities (`space-x-3 rtl:space-x-reverse`, `text-center lg:text-left rtl:lg:text-right`) instead of hardcoded left/right margins.

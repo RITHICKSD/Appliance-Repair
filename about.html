@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="transition-theme">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VoltFix - Our Team, Mission, and History</title>
+  <meta name="description" content="Discover the team of licensed master electricians and technicians behind VoltFix. Learn about our commitment to eco-friendly appliance repairs and 90-day warranties.">
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            heading: ['Outfit', 'sans-serif'],
+          },
+          colors: {
+            slate: {
+              350: '#cbd5e1',
+              450: '#94a3b8',
+              650: '#475569',
+              750: '#334155',
+              805: '#1e293b',
+              808: '#1e293b',
+              850: '#1e293b',
+            },
+            indigo: {
+              150: '#e0e7ff',
+              650: '#4338ca',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-100 min-h-screen flex flex-col transition-theme">
+
+  <!-- Header (Common) -->
+  <header class="sticky top-0 z-50 w-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-theme">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="index.html" class="flex items-center space-x-2 group">
+        <div class="w-10 h-10 bg-indigo-600 text-white rounded-lg flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+        </div>
+        <span class="text-xl font-bold font-heading tracking-tight bg-gradient-to-r from-indigo-600 to-blue-500 bg-clip-text text-transparent dark:from-indigo-400 dark:to-blue-400">VoltFix</span>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex items-center space-x-8 font-medium">
+        <div class="relative">
+          <button id="home-dropdown-btn" class="flex items-center space-x-1 text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 focus:outline-none">
+            <span>Home</span>
+            <i class="fa-solid fa-chevron-down text-xs transition-transform duration-200"></i>
+          </button>
+          <div id="home-dropdown-menu" class="hidden absolute top-full left-0 mt-2 w-48 bg-white dark:bg-slate-850 rounded-lg shadow-xl border border-slate-200 dark:border-slate-750 py-2 opacity-0 translate-y-2 transition-all z-50">
+            <a href="index.html" class="block px-4 py-2 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">Home 1</a>
+            <a href="home2.html" class="block px-4 py-2 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">Home 2</a>
+          </div>
+        </div>
+        <a href="about.html" class="text-indigo-600 dark:text-indigo-400">About</a>
+        <a href="services.html" class="text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400">Services</a>
+        <a href="pricing.html" class="text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400">Pricing</a>
+        <a href="guides.html" class="text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400">Repair Guides</a>
+        <a href="contact.html" class="text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400">Contact</a>
+      </nav>
+
+      <!-- Right Utility Actions -->
+      <div class="flex items-center space-x-3">
+
+        <!-- RTL/LTR Toggle -->
+        <button id="rtl-toggle" class="w-12 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-700 transition-theme focus:outline-none font-bold text-xs">
+          <span id="rtl-text">LTR</span>
+        </button>
+
+        <!-- Mobile Menu Btn -->
+        <button id="mobile-menu-btn" class="md:hidden w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-700 transition-theme focus:outline-none">
+          <i class="fa-solid fa-bars text-lg text-slate-700 dark:text-slate-200"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div id="mobile-drawer-overlay" class="hidden fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50"></div>
+  <div id="mobile-drawer" class="fixed top-0 right-0 bottom-0 w-80 bg-white dark:bg-slate-900 max-w-full shadow-2xl z-50 transform translate-x-full transition-transform duration-300 border-l border-slate-200 dark:border-slate-800 p-6 flex flex-col justify-between">
+    <div>
+      <div class="flex items-center justify-between pb-6 border-b border-slate-200 dark:border-slate-800">
+        <span class="text-lg font-bold font-heading text-indigo-600 dark:text-indigo-400">VoltFix Nav Menu</span>
+        <button id="mobile-menu-close-btn" class="w-8 h-8 rounded-full flex items-center justify-center bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700">
+          <i class="fa-solid fa-xmark text-slate-650 dark:text-slate-350"></i>
+        </button>
+      </div>
+      <div class="flex flex-col py-6 space-y-2 font-medium">
+        <!-- Home Accordion -->
+        <div>
+          <button id="mobile-home-acc-btn" class="flex items-center justify-between w-full text-left text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 py-2 min-h-0 bg-transparent border-0 p-0 focus:outline-none">
+            <span>Home</span>
+            <i id="mobile-home-acc-icon" class="fa-solid fa-chevron-right text-xs transition-transform duration-200"></i>
+          </button>
+          <div id="mobile-home-acc-sub" class="hidden flex-col pl-3 mt-1 pb-1 space-y-1 border-l-2 border-slate-200 dark:border-slate-700">
+            <a href="index.html" class="text-sm text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 py-1.5 block">Home 1</a>
+            <a href="home2.html" class="text-sm text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 py-1.5 block">Home 2</a>
+          </div>
+        </div>
+        <a href="about.html" class="text-indigo-600 dark:text-indigo-400 font-semibold py-2">About Us</a>
+        <a href="services.html" class="text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 py-2">Our Services</a>
+        <a href="pricing.html" class="text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 py-2">Pricing</a>
+        <a href="guides.html" class="text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 py-2">Repair Guides</a>
+        <a href="contact.html" class="text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 py-2">Contact Us</a>
+        <!-- Appearance Toggles -->
+        <div class="flex items-center gap-3 pt-3 mt-1 border-t border-slate-200 dark:border-slate-800">
+          <button id="mobile-theme-btn" onclick="document.getElementById('theme-toggle').click()" class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-700 transition-theme min-h-0" title="Toggle Theme">
+          </button>
+          <button onclick="document.getElementById('rtl-toggle').click()" class="w-12 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-700 transition-theme font-bold text-xs text-slate-700 dark:text-slate-200 min-h-0">
+            <span id="mobile-rtl-text">LTR</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="pt-6 border-t border-slate-200 dark:border-slate-800">
+      <p class="text-xs text-slate-400 text-center">&copy; 2026 VoltFix Repairs. All rights reserved.</p>
+    </div>
+  </div>
+
+  <!-- Main Content - About Us (6 Sections) -->
+  <main class="flex-grow">
+    
+    <!-- Section 1: Mission & Vision Hero -->
+    <section class="bg-gradient-to-br from-indigo-900 to-slate-900 text-white py-14 sm:py-20 relative transition-theme overflow-hidden">
+      <div class="absolute inset-0 bg-cover bg-center mix-blend-overlay opacity-25" style="background-image: url('https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&q=80&w=1200');"></div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-4 sm:space-y-6">
+        <span class="bg-indigo-500/20 border border-indigo-500/30 px-3 py-1 rounded-full text-indigo-300 font-semibold text-xs sm:text-sm uppercase tracking-wider inline-block">Our Mission</span>
+        <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold font-heading tracking-tight leading-tight max-w-3xl mx-auto">
+          Extending Appliance Lifespans, Ensuring Safety in Every Home
+        </h1>
+        <p class="text-slate-350 text-sm sm:text-lg max-w-xl mx-auto">
+          We believe that standard electrical appliances shouldn't just be discarded at the first sign of malfunction. Our licensed experts diagnose, fix, and recertify them.
+        </p>
+      </div>
+    </section>
+
+    <!-- Section 2: Interactive History Timeline -->
+    <section class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <h2 class="text-3xl font-extrabold font-heading dark:text-white">The VoltFix Story</h2>
+        <p class="text-slate-650 dark:text-slate-350 mt-4">Tracking our growth from a neighborhood workshop to a local household repair brand.</p>
+      </div>
+
+      <div class="relative border-l border-slate-200 dark:border-slate-800 ml-4 md:ml-0 md:grid md:grid-cols-2 md:gap-12 md:border-l-0 md:before:absolute md:before:top-0 md:before:bottom-0 md:before:left-1/2 md:before:w-0.5 md:before:bg-slate-200 dark:md:before:bg-slate-800">
+        <!-- Milestone 1 -->
+        <div class="relative pl-8 md:pl-0 md:pr-12 md:text-right space-y-2 mb-12 md:col-start-1">
+          <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-indigo-600 border-4 border-slate-100 dark:border-slate-900 md:left-auto md:-right-[9px] z-10"></div>
+          <span class="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider block">2014 • Foundation</span>
+          <h3 class="text-xl font-bold dark:text-white">The Spark Garage</h3>
+          <p class="text-sm text-slate-650 dark:text-slate-350">Founded as a tiny repair bay dedicated to winding local ceiling fans and restoring household steam irons with a guarantee of safety.</p>
+        </div>
+        <!-- Milestone 2 -->
+        <div class="relative pl-8 md:pl-12 space-y-2 mb-12 md:col-start-2 md:row-start-2">
+          <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-indigo-600 border-4 border-slate-100 dark:border-slate-900 z-10"></div>
+          <span class="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider block">2018 • Scaled Services</span>
+          <h3 class="text-xl font-bold dark:text-white">VoltFix Labs Inception</h3>
+          <p class="text-sm text-slate-650 dark:text-slate-350">Moved to a formal main street facility, expanding diagnostics into kitchen mixers, grinders, and heavy storage geysers.</p>
+        </div>
+        <!-- Milestone 3 -->
+        <div class="relative pl-8 md:pl-0 md:pr-12 md:text-right space-y-2 mb-12 md:col-start-1 md:row-start-3">
+          <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-indigo-600 border-4 border-slate-100 dark:border-slate-900 md:left-auto md:-right-[9px] z-10"></div>
+          <span class="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider block">2022 • Pickup Ecosystem</span>
+          <h3 class="text-xl font-bold dark:text-white">Direct-to-Door Logistics</h3>
+          <p class="text-sm text-slate-650 dark:text-slate-350">Launched our neighborhood pickup and delivery truck system, creating the ultimate friction-free booking framework for busy residents.</p>
+        </div>
+        <!-- Milestone 4 -->
+        <div class="relative pl-8 md:pl-12 space-y-2 md:col-start-2 md:row-start-4">
+          <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-indigo-600 border-4 border-slate-100 dark:border-slate-900 z-10"></div>
+          <span class="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider block">2026 • Care Subscriptions</span>
+          <h3 class="text-xl font-bold dark:text-white">Digital Maintenance Solutions</h3>
+          <p class="text-sm text-slate-650 dark:text-slate-350">Introduced Home Pro Care and API booking options, letting buildings and households automate all their electrical inspections.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Meet the Master Technicians -->
+    <section class="py-14 sm:py-20 bg-slate-100 dark:bg-slate-850 transition-theme">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-16">
+          <h2 class="text-2xl sm:text-3xl font-extrabold font-heading dark:text-white">Meet Our Master Electricians</h2>
+          <p class="text-slate-650 dark:text-slate-350 mt-3 sm:mt-4 text-sm sm:text-base">Certified, safety-oriented, and experienced professionals who handle every diagnostic request.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-8">
+          <!-- Member 1 -->
+          <div class="bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-800 hover:-translate-y-1 transition-all group">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=300" alt="Elena Petrova, Lead Safety Inspector" class="w-full aspect-[4/5] object-cover filter grayscale group-hover:grayscale-0 transition-all">
+            <div class="p-6">
+              <h3 class="font-bold text-lg dark:text-white">Elena Petrova</h3>
+              <p class="text-xs text-indigo-650 font-semibold mb-2">Lead Safety Inspector</p>
+              <p class="text-xs text-slate-450">Licensed Electrical Engineer with 12 years of diagnostic safety expertise.</p>
+            </div>
+          </div>
+          <!-- Member 2 -->
+          <div class="bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-800 hover:-translate-y-1 transition-all group">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=300" alt="Marcus Aurelius, Small Appliances Lead" class="w-full aspect-[4/5] object-cover filter grayscale group-hover:grayscale-0 transition-all">
+            <div class="p-6">
+              <h3 class="font-bold text-lg dark:text-white">Marcus Aurelius</h3>
+              <p class="text-xs text-indigo-650 font-semibold mb-2">Small Appliances Lead</p>
+              <p class="text-xs text-slate-450">Specialist in winding ceiling fans and steam iron safety restorations.</p>
+            </div>
+          </div>
+          <!-- Member 3 -->
+          <div class="bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-800 hover:-translate-y-1 transition-all group">
+            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=300" alt="Robert Vance, Master Geyser Engineer" class="w-full aspect-[4/5] object-cover filter grayscale group-hover:grayscale-0 transition-all">
+            <div class="p-6">
+              <h3 class="font-bold text-lg dark:text-white">Robert Vance</h3>
+              <p class="text-xs text-indigo-650 font-semibold mb-2">Master Geyser Engineer</p>
+              <p class="text-xs text-slate-450">Heating technician specializing in thermostat calibrations and safety valves.</p>
+            </div>
+          </div>
+          <!-- Member 4 -->
+          <div class="bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-800 hover:-translate-y-1 transition-all group">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=300" alt="Lisa Chen, General Operations Manager" class="w-full aspect-[4/5] object-cover filter grayscale group-hover:grayscale-0 transition-all">
+            <div class="p-6">
+              <h3 class="font-bold text-lg dark:text-white">Lisa Chen</h3>
+              <p class="text-xs text-indigo-650 font-semibold mb-2">Operations Manager</p>
+              <p class="text-xs text-slate-450">Coordinates pickup logistics, dispatching queues, and parts quality control.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Certifications & Quality Compliance -->
+    <section class="py-14 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+        <div class="space-y-6">
+          <h2 class="text-3xl font-extrabold font-heading tracking-tight dark:text-white">Verified Safety & Quality Standards</h2>
+          <p class="text-slate-650 dark:text-slate-350">
+            Household electrical repairs demand strict compliance to avoid fire hazards and shocks. Every device leaving our workshop is fully audited, tested for grounding integrity, and certified.
+          </p>
+          <div class="space-y-4 pt-4">
+            <div class="flex items-center space-x-3">
+              <div class="w-8 h-8 rounded-full bg-emerald-100 dark:bg-emerald-950/80 text-emerald-600 dark:text-emerald-400 flex items-center justify-center"><i class="fa-solid fa-stamp"></i></div>
+              <span class="text-sm font-semibold dark:text-white">ISO 9001:2015 Quality Management Certified</span>
+            </div>
+            <div class="flex items-center space-x-3">
+              <div class="w-8 h-8 rounded-full bg-emerald-100 dark:bg-emerald-950/80 text-emerald-600 dark:text-emerald-400 flex items-center justify-center"><i class="fa-solid fa-bolt"></i></div>
+              <span class="text-sm font-semibold dark:text-white">Licensed Industrial Electrician Supervision</span>
+            </div>
+            <div class="flex items-center space-x-3">
+              <div class="w-8 h-8 rounded-full bg-emerald-100 dark:bg-emerald-950/80 text-emerald-600 dark:text-emerald-400 flex items-center justify-center"><i class="fa-solid fa-leaf"></i></div>
+              <span class="text-sm font-semibold dark:text-white">Eco-Safe Recycling Partner (E-Waste Compliance)</span>
+            </div>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="bg-white dark:bg-slate-850 p-6 rounded-xl border border-slate-200 dark:border-slate-800 text-center space-y-2 shadow-sm hover:shadow-lg transition-shadow">
+            <div class="text-indigo-600 dark:text-indigo-400 text-3xl"><i class="fa-solid fa-shield-halved"></i></div>
+            <h4 class="font-bold font-heading dark:text-white text-base">Safety First</h4>
+            <p class="text-xs text-slate-500">Every repair undergoes a 10-point ground leak check.</p>
+          </div>
+          <div class="bg-white dark:bg-slate-850 p-6 rounded-xl border border-slate-200 dark:border-slate-800 text-center space-y-2 shadow-sm hover:shadow-lg transition-shadow">
+            <div class="text-indigo-600 dark:text-indigo-400 text-3xl"><i class="fa-solid fa-warehouse"></i></div>
+            <h4 class="font-bold font-heading dark:text-white text-base">Original Spare Parts</h4>
+            <p class="text-xs text-slate-500">We source genuine replacement elements only.</p>
+          </div>
+          <div class="bg-white dark:bg-slate-850 p-6 rounded-xl border border-slate-200 dark:border-slate-800 text-center space-y-2 shadow-sm hover:shadow-lg transition-shadow">
+            <div class="text-indigo-600 dark:text-indigo-400 text-3xl"><i class="fa-solid fa-heart-pulse"></i></div>
+            <h4 class="font-bold font-heading dark:text-white text-base">Life Extender</h4>
+            <p class="text-xs text-slate-500">Extending appliance lifespans by up to 5 years.</p>
+          </div>
+          <div class="bg-white dark:bg-slate-850 p-6 rounded-xl border border-slate-200 dark:border-slate-800 text-center space-y-2 shadow-sm hover:shadow-lg transition-shadow">
+            <div class="text-indigo-600 dark:text-indigo-400 text-3xl"><i class="fa-solid fa-truck-ramp-box"></i></div>
+            <h4 class="font-bold font-heading dark:text-white text-base">Door pickup</h4>
+            <p class="text-xs text-slate-500">Convenient local transport to protect appliances.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5: Workshop Infrastructure Gallery -->
+    <section class="py-14 sm:py-20 bg-slate-100 dark:bg-slate-850 transition-theme">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-16">
+          <h2 class="text-2xl sm:text-3xl font-extrabold font-heading dark:text-white">Our Diagnostic Infrastructure</h2>
+          <p class="text-slate-650 dark:text-slate-350 mt-3 sm:mt-4 text-sm sm:text-base">Inside the VoltFix testing facility, equipped with industrial testing chambers.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 sm:gap-8">
+          <div class="bg-white dark:bg-slate-900 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-sm">
+            <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&q=80&w=400" alt="Diagnostics Station" class="w-full aspect-video object-cover">
+            <div class="p-6">
+              <h3 class="font-bold text-lg dark:text-white mb-2">Diagnostics Station</h3>
+              <p class="text-xs text-slate-600 dark:text-slate-400">Equipped with digital oscilloscopes and current surge gauges to map subtle electrical failures.</p>
+            </div>
+          </div>
+          <div class="bg-white dark:bg-slate-900 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-sm">
+            <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&q=80&w=400" alt="Motor Winding & Rebalancing Station" class="w-full aspect-video object-cover">
+            <div class="p-6">
+              <h3 class="font-bold text-lg dark:text-white mb-2">Motor Rebuilding Bay</h3>
+              <p class="text-xs text-slate-650 dark:text-slate-350">Precision armature coil winders and balancer rigs to silence humming fans and kitchen mixers.</p>
+            </div>
+          </div>
+          <div class="bg-white dark:bg-slate-900 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-sm">
+            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=400" alt="Pressure Testing & Heating Chamber" class="w-full aspect-video object-cover">
+            <div class="p-6">
+              <h3 class="font-bold text-lg dark:text-white mb-2">Thermal & Safety Chambers</h3>
+              <p class="text-xs text-slate-650 dark:text-slate-350">Specially insulated testing chambers to load-test water geysers under standard operational pressure.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 6: Customer Reviews Carousel -->
+    <section class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <h2 class="text-3xl font-extrabold font-heading dark:text-white">Reviews From Our Community</h2>
+        <p class="text-slate-650 dark:text-slate-350 mt-4">We are proud of the trust our neighbors place in our repairs.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-white dark:bg-slate-850 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+          <div class="text-amber-400 text-sm"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+          <p class="text-xs text-slate-650 dark:text-slate-350 italic">"The team winding my ceiling fan motor did an exceptional job. It functions silently now, exactly like a new fan. Friendly staff, quick diagnostics!"</p>
+          <div class="flex items-center space-x-3 pt-2 border-t border-slate-100 dark:border-slate-800">
+            <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-xs">AH</div>
+            <div>
+              <h4 class="font-bold text-xs dark:text-white">Alan Harris</h4>
+              <p class="text-[10px] text-slate-400">Local Customer</p>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white dark:bg-slate-850 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+          <div class="text-amber-400 text-sm"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+          <p class="text-xs text-slate-650 dark:text-slate-350 italic">"I highly recommend their geyser descaling program. Our heating time was cut in half, and the hot water flow is much cleaner now."</p>
+          <div class="flex items-center space-x-3 pt-2 border-t border-slate-100 dark:border-slate-800">
+            <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-xs">NL</div>
+            <div>
+              <h4 class="font-bold text-xs dark:text-white">Nancy Long</h4>
+              <p class="text-[10px] text-slate-400">Apartment Owner</p>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white dark:bg-slate-850 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+          <div class="text-amber-400 text-sm"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+          <p class="text-xs text-slate-650 dark:text-slate-350 italic">"They fixed my high-end steam iron in under 4 hours. No hidden diagnostics fees, very straightforward and trustworthy shop."</p>
+          <div class="flex items-center space-x-3 pt-2 border-t border-slate-100 dark:border-slate-800">
+            <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-xs">MT</div>
+            <div>
+              <h4 class="font-bold text-xs dark:text-white">Mark Taylor</h4>
+              <p class="text-[10px] text-slate-400">Local Resident</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer (Common) -->
+  <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800 transition-theme">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div class="space-y-4">
+        <a href="index.html" class="flex items-center space-x-2 group">
+          <div class="w-10 h-10 bg-indigo-600 text-white rounded-lg flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+          </div>
+          <span class="text-xl font-bold font-heading tracking-tight bg-gradient-to-r from-indigo-600 to-blue-500 bg-clip-text text-transparent dark:from-indigo-400 dark:to-blue-400">VoltFix</span>
+        </a>
+        <p class="text-xs text-slate-500">Premium local electrical diagnostic and repair center for ceiling fans, irons, mixers, and geysers. Fast turnaround, transparent pricing.</p>
+        <div class="flex space-x-3 text-slate-500">
+          <a href="#" class="hover:text-indigo-400"><i class="fa-brands fa-facebook"></i></a>
+          <a href="#" class="hover:text-indigo-400"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#" class="hover:text-indigo-400"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="hover:text-indigo-400"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+      <div>
+        <h4 class="font-bold text-white mb-4 font-heading">Navigation</h4>
+        <ul class="space-y-2 text-sm">
+          <li><a href="index.html" class="hover:text-indigo-400">General Landing</a></li>
+          <li><a href="home2.html" class="hover:text-indigo-400">Subscription SaaS</a></li>
+          <li><a href="about.html" class="hover:text-indigo-400">About Us</a></li>
+          <li><a href="services.html" class="hover:text-indigo-400">Services</a></li>
+          <li><a href="guides.html" class="hover:text-indigo-400">Repair Guides</a></li>
+          <li><a href="contact.html" class="hover:text-indigo-400">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-bold text-white mb-4 font-heading">Services</h4>
+        <ul class="space-y-2 text-sm">
+          <li><a href="service-details.html" class="hover:text-indigo-400">Ceiling Fan Repair</a></li>
+          <li><a href="service-details.html" class="hover:text-indigo-400">Steam Iron Descaling</a></li>
+          <li><a href="service-details.html" class="hover:text-indigo-400">Mixer Motor Rewinding</a></li>
+          <li><a href="service-details.html" class="hover:text-indigo-400">Geyser Element Swap</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-bold text-white mb-4 font-heading">Operating Hours</h4>
+        <ul class="space-y-2 text-xs">
+          <li>Monday - Friday: <span class="text-slate-300">8:00 AM - 7:00 PM</span></li>
+          <li>Saturday: <span class="text-slate-300">9:00 AM - 5:00 PM</span></li>
+          <li>Sunday: <span class="text-red-400 font-semibold">Closed for Safety Audits</span></li>
+          <li class="pt-2 text-slate-500"><i class="fa-solid fa-location-dot mr-1"></i> 101 Spark Ave, Suite B, Electropolis</li>
+        </ul>
+      </div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-slate-800 mt-8 pt-8 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500">
+      <p>&copy; 2026 VoltFix Appliance Repairs. Crafted with electrical precision.</p>
+      <div class="flex space-x-4 mt-4 sm:mt-0">
+        <a href="#" class="hover:text-indigo-400">Privacy Policy</a>
+        <a href="#" class="hover:text-indigo-400">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- App Data & Logic -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

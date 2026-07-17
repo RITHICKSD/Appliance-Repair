@@ -1,0 +1,1 @@
+Tailwind CSS v4 loaded from cdnjs with `darkMode: 'class'` and custom slate/indigo palette extensions; FontAwesome 6.4.0 for icons; vanilla ES5 JavaScript with no framework or bundler.

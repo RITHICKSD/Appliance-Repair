@@ -1,0 +1,394 @@
+/* VoltFix Custom Styling Sheet */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --font-heading: 'Outfit', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+body {
+  font-family: var(--font-body);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
+
+/* Glassmorphism Styles */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.dark .glass-panel {
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Smooth Transition animations */
+.transition-theme {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, fill 0.3s ease, stroke 0.3s ease;
+}
+
+/* RTL Adjustments */
+html[dir="rtl"] .ltr-only {
+  display: none !important;
+}
+
+html[dir="ltr"] .rtl-only {
+  display: none !important;
+}
+
+html[dir="rtl"] {
+  text-align: right;
+}
+
+html[dir="rtl"] .transform {
+  --tw-translate-x: calc(var(--tw-translate-x) * -1);
+}
+
+/* Custom Micro-animations */
+@keyframes pulse-ring {
+  0% { transform: scale(0.95); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.5; }
+  100% { transform: scale(1.2); opacity: 0; }
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 2s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+}
+
+/* Custom Slider & Swiper-like before/after styling */
+.comparison-slider {
+  position: relative;
+  overflow: hidden;
+}
+
+.comparison-slider img {
+  display: block;
+  user-select: none;
+}
+
+/* Custom Scrollbar for sleek modern aesthetics */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #334155;
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Custom RTL-aware margin/padding rules if needed */
+html[dir="rtl"] .mr-2-rtl {
+  margin-left: 0.5rem;
+  margin-right: 0;
+}
+
+html[dir="rtl"] .ml-2-rtl {
+  margin-right: 0.5rem;
+  margin-left: 0;
+}
+
+/* Dark theme date picker calendar icon color white */
+.dark input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+/* ============================================================
+   MOBILE RESPONSIVENESS — 360px / 768px / 1024px
+   ============================================================ */
+
+/* Global overflow prevention */
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Images should never overflow their container */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Touch-friendly minimum tap target */
+button, a, select, input, textarea {
+  min-height: 40px;
+}
+
+/* Desktop nav — reset tap-target height so all items share the same center line */
+header nav a,
+header nav button {
+  min-height: 0;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+}
+
+/* Scrollable tables on small screens */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+table {
+  min-width: 520px;
+}
+
+/* ── 360px (small phones) ── */
+@media (max-width: 479px) {
+  /* Fluid container padding */
+  .max-w-7xl, .max-w-5xl, .max-w-4xl, .max-w-3xl, .max-w-2xl {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Hero headline scaling */
+  h1 {
+    font-size: 1.75rem !important;
+    line-height: 1.2 !important;
+  }
+
+  h2 {
+    font-size: 1.5rem !important;
+    line-height: 1.25 !important;
+  }
+
+  h3 {
+    font-size: 1.125rem !important;
+  }
+
+  /* Hero section vertical padding reduction */
+  section {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  /* Stat row in hero – stack on tiny screens */
+  .grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+
+  .grid-cols-3 p.text-2xl {
+    font-size: 1.125rem !important;
+  }
+
+  /* Process stepper – single column with left-aligned numbers */
+  .process-step-circle {
+    width: 3rem;
+    height: 3rem;
+    font-size: 1rem;
+  }
+
+  /* Booking form padding */
+  #landing-booking-form,
+  .booking-card {
+    padding: 1.25rem;
+  }
+
+  /* RTL toggle – hide label on very small screens */
+  #rtl-toggle {
+    width: 2.25rem;
+    font-size: 0.625rem;
+  }
+
+  /* Before/after comparison slider */
+  .comparison-slider {
+    height: 240px;
+  }
+
+  /* Pricing cards – full-width on 360 */
+  .pricing-card {
+    min-width: 0;
+  }
+
+  /* Footer grid – single column */
+  footer .grid {
+    grid-template-columns: 1fr;
+  }
+
+  footer .grid > div + div {
+    margin-top: 2rem;
+  }
+}
+
+/* ── 480px–767px (large phones) ── */
+@media (min-width: 480px) and (max-width: 767px) {
+  h1 {
+    font-size: 2rem !important;
+    line-height: 1.2 !important;
+  }
+
+  h2 {
+    font-size: 1.625rem !important;
+  }
+
+  section {
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
+  }
+}
+
+/* ── 768px (tablets / md breakpoint) ── */
+@media (min-width: 640px) and (max-width: 1023px) {
+  /* 2-col grids on tablet */
+  .lg\:grid-cols-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .lg\:grid-cols-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* Hero right card – hide on tablet to avoid crowding */
+  .hero-right-card {
+    display: none;
+  }
+
+  /* Hero text – center on tablet */
+  .hero-text-col {
+    text-align: center;
+  }
+
+  /* Service grid 2-col on tablet */
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ── 1024px (desktops / lg breakpoint) ── */
+@media (min-width: 1024px) {
+  section {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+}
+
+/* ── Ensure mobile drawer is full-screen-safe ── */
+@media (max-width: 399px) {
+  #mobile-drawer {
+    width: 100% !important;
+    max-width: 100%;
+  }
+}
+
+/* ── Navigation utility buttons on small screens ── */
+@media (max-width: 479px) {
+  #rtl-toggle {
+    display: none !important;
+  }
+
+  header .flex.items-center.space-x-3 {
+    gap: 0.5rem;
+  }
+}
+
+/* ── Forms – full width on mobile ── */
+@media (max-width: 639px) {
+  input, select, textarea {
+    width: 100% !important;
+  }
+
+  .grid-cols-2.sm\:grid-cols-2 {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Flex button groups – stack vertically */
+  .flex.flex-col.sm\:flex-row {
+    flex-direction: column !important;
+  }
+
+  .flex.flex-col.sm\:flex-row > a,
+  .flex.flex-col.sm\:flex-row > button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ── Contact page map / info grid ── */
+@media (max-width: 767px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Guides / blog card grid on 360 ── */
+@media (max-width: 639px) {
+  .articles-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Service detail page sidebars ── */
+@media (max-width: 1023px) {
+  .service-detail-layout {
+    flex-direction: column;
+  }
+
+  .service-detail-sidebar {
+    width: 100%;
+    margin-top: 2rem;
+  }
+}
+
+/* ── Testimonials grid ── */
+@media (max-width: 767px) {
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── About team / stats grid ── */
+@media (max-width: 639px) {
+  .about-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Prevent horizontal scroll from absolute positioned decorations ── */
+section {
+  overflow-x: hidden;
+}
+
+/* ── Pricing page — stack on 360 ── */
+@media (max-width: 639px) {
+  .pricing-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+

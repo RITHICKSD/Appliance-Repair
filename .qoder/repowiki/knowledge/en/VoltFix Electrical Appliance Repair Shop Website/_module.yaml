@@ -1,0 +1,26 @@
+schema_version: 1
+module_path: ""
+title: VoltFix Electrical Appliance Repair Shop Website
+scope:
+    - .
+    - css/
+    - js/
+    - index.html
+    - about.html
+    - contact.html
+    - guides.html
+    - pricing.html
+    - services.html
+    - guide-details.html
+    - service-details.html
+    - home2.html
+    - conta.jpg
+    - f1.jpg
+    - f2.jpg
+    - f3.jpg
+    - f4.jpg
+    - her.jpg
+    - ser.jpg
+source_files: []
+depends_on: []
+related_to: []

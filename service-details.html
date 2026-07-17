@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="transition-theme">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VoltFix - Premium Geyser Repair & Maintenance Services</title>
+  <meta name="description" content="Struggling with a cold geyser shower? We offer certified geyser element replacements, thermostat calibrations, and scale cleanouts. 90-day warranty.">
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            heading: ['Outfit', 'sans-serif'],
+          },
+          colors: {
+            slate: {
+              350: '#cbd5e1',
+              450: '#94a3b8',
+              650: '#475569',
+              750: '#334155',
+              805: '#1e293b',
+              808: '#1e293b',
+              850: '#1e293b',
+            },
+            indigo: {
+              150: '#e0e7ff',
+              650: '#4338ca',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-100 min-h-screen flex flex-col transition-theme">
+
+  <!-- Header (Common) -->
+  <header class="sticky top-0 z-50 w-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-theme">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="index.html" class="flex items-center space-x-2 group">
+        <div class="w-10 h-10 bg-indigo-600 text-white rounded-lg flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+        </div>
+        <span class="text-xl font-bold font-heading tracking-tight bg-gradient-to-r from-indigo-600 to-blue-500 bg-clip-text text-transparent dark:from-indigo-400 dark:to-blue-400">VoltFix</span>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex items-center space-x-8 font-medium">
+        <div class="relative">
+          <button id="home-dropdown-btn" class="flex items-center space-x-1 text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 focus:outline-none">
+            <span>Home</span>
+            <i class="fa-solid fa-chevron-down text-xs transition-transform duration-205"></i>
+          </button>
+          <div id="home-dropdown-menu" class="hidden absolute top-full left-0 mt-2 w-48 bg-white dark:bg-slate-850 rounded-lg shadow-xl border border-slate-200 dark:border-slate-750 py-2 opacity-0 translate-y-2 transition-all z-50">
+            <a href="index.html" class="block px-4 py-2 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">Home 1</a>
+            <a href="home2.html" class="block px-4 py-2 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">Home 2</a>
+          </div>
+        </div>
+        <a href="about.html" class="text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400">About</a>
+        <a href="services.html" class="text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400">Services</a>
+        <a href="pricing.html" class="text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400">Pricing</a>
+        <a href="guides.html" class="text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400">Repair Guides</a>
+        <a href="contact.html" class="text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400">Contact</a>
+      </nav>
+
+      <!-- Right Utility Actions -->
+      <div class="flex items-center space-x-3">
+
+        <!-- RTL/LTR Toggle -->
+        <button id="rtl-toggle" class="w-12 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-700 transition-theme focus:outline-none font-bold text-xs">
+          <span id="rtl-text">LTR</span>
+        </button>
+
+        <!-- Mobile Menu Btn -->
+        <button id="mobile-menu-btn" class="md:hidden w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-700 transition-theme focus:outline-none">
+          <i class="fa-solid fa-bars text-lg text-slate-700 dark:text-slate-200"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div id="mobile-drawer-overlay" class="hidden fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50"></div>
+  <div id="mobile-drawer" class="fixed top-0 right-0 bottom-0 w-80 bg-white dark:bg-slate-900 max-w-full shadow-2xl z-50 transform translate-x-full transition-transform duration-300 border-l border-slate-200 dark:border-slate-800 p-6 flex flex-col justify-between">
+    <div>
+      <div class="flex items-center justify-between pb-6 border-b border-slate-200 dark:border-slate-800">
+        <span class="text-lg font-bold font-heading text-indigo-600 dark:text-indigo-400">VoltFix Nav Menu</span>
+        <button id="mobile-menu-close-btn" class="w-8 h-8 rounded-full flex items-center justify-center bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700">
+          <i class="fa-solid fa-xmark text-slate-650 dark:text-slate-350"></i>
+        </button>
+      </div>
+      <div class="flex flex-col py-6 space-y-2 font-medium">
+        <!-- Home Accordion -->
+        <div>
+          <button id="mobile-home-acc-btn" class="flex items-center justify-between w-full text-left text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 py-2 min-h-0 bg-transparent border-0 p-0 focus:outline-none">
+            <span>Home</span>
+            <i id="mobile-home-acc-icon" class="fa-solid fa-chevron-right text-xs transition-transform duration-200"></i>
+          </button>
+          <div id="mobile-home-acc-sub" class="hidden flex-col pl-3 mt-1 pb-1 space-y-1 border-l-2 border-slate-200 dark:border-slate-700">
+            <a href="index.html" class="text-sm text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 py-1.5 block">Home 1</a>
+            <a href="home2.html" class="text-sm text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 py-1.5 block">Home 2</a>
+          </div>
+        </div>
+        <a href="about.html" class="text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 py-2">About Us</a>
+        <a href="services.html" class="text-indigo-600 dark:text-indigo-400 font-semibold py-2">Our Services</a>
+        <a href="pricing.html" class="text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 py-2">Pricing</a>
+        <a href="guides.html" class="text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 py-2">Repair Guides</a>
+        <a href="contact.html" class="text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 py-2">Contact Us</a>
+        <!-- Appearance Toggles -->
+        <div class="flex items-center gap-3 pt-3 mt-1 border-t border-slate-200 dark:border-slate-800">
+          <button id="mobile-theme-btn" onclick="document.getElementById('theme-toggle').click()" class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-700 transition-theme min-h-0" title="Toggle Theme">
+          </button>
+          <button onclick="document.getElementById('rtl-toggle').click()" class="w-12 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-700 transition-theme font-bold text-xs text-slate-700 dark:text-slate-200 min-h-0">
+            <span id="mobile-rtl-text">LTR</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="pt-6 border-t border-slate-200 dark:border-slate-800">
+      <p class="text-xs text-slate-400 text-center">&copy; 2026 VoltFix Repairs. All rights reserved.</p>
+    </div>
+  </div>
+
+  <!-- Main Content - Geyser Repair Service Details (6 Sections) -->
+  <main class="flex-grow">
+    
+    <!-- Section 1: Service Hero & Overview -->
+    <section class="bg-gradient-to-br from-indigo-900 to-slate-900 text-white py-16 transition-theme">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div class="space-y-6">
+          <span class="bg-indigo-500/20 border border-indigo-500/30 px-3 py-1 rounded-full text-indigo-300 font-semibold text-xs uppercase tracking-wider inline-block">Heavy Appliances</span>
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-heading tracking-tight dark:text-white leading-tight">
+            Premium Water Geyser <br class="hidden sm:inline">
+            Repair & Scale Cleanout
+          </h1>
+          <p class="text-slate-350 text-sm">
+            Don't risk cold showers or high electric utility bills. We carry out complete heating element replacements, thermostat calibrations, safety relief valves replacements, and tank descaling.
+          </p>
+          <div class="flex flex-wrap gap-4 text-xs font-semibold">
+            <span class="bg-slate-800/80 px-3 py-1.5 rounded-lg border border-slate-700/50"><i class="fa-solid fa-clock mr-1 text-indigo-400"></i> Turnaround: 24-48 Hours</span>
+            <span class="bg-slate-800/80 px-3 py-1.5 rounded-lg border border-slate-700/50"><i class="fa-solid fa-dollar-sign mr-1 text-indigo-400"></i> Diagnostics: Waived with Repair</span>
+            <span class="bg-slate-800/80 px-3 py-1.5 rounded-lg border border-slate-700/50"><i class="fa-solid fa-shield mr-1 text-indigo-400"></i> Warranty: 90 Days</span>
+          </div>
+        </div>
+        <div class="flex justify-center lg:justify-end">
+          <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=500" alt="Hot water geyser thermostat inspection" class="rounded-xl shadow-xl border border-slate-850 aspect-[4/3] object-cover max-w-sm">
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Common Issues We Fix -->
+    <section class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <h2 class="text-3xl font-extrabold font-heading tracking-tight dark:text-white">Common Geyser Diagnostics</h2>
+        <p class="text-slate-650 dark:text-slate-350 mt-4">We quickly analyze and repair the root causes of all water heater anomalies.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Issue 1 -->
+        <div class="bg-white dark:bg-slate-850 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-start space-x-4">
+          <div class="w-10 h-10 bg-indigo-100 dark:bg-indigo-900/50 text-indigo-650 dark:text-indigo-400 rounded-lg flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-droplet-slash"></i></div>
+          <div>
+            <h3 class="font-bold font-heading dark:text-white text-lg mb-1">Water is Not Heating</h3>
+            <p class="text-xs text-slate-650 dark:text-slate-350">Usually caused by a burnt heating element or a faulty safety cutoff thermostat. We carry original components to perform fast, on-site replacements.</p>
+          </div>
+        </div>
+        <!-- Issue 2 -->
+        <div class="bg-white dark:bg-slate-850 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-start space-x-4">
+          <div class="w-10 h-10 bg-indigo-100 dark:bg-indigo-900/50 text-indigo-650 dark:text-indigo-400 rounded-lg flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-fill-drip"></i></div>
+          <div>
+            <h3 class="font-bold font-heading dark:text-white text-lg mb-1">Water Heater is Leaking</h3>
+            <p class="text-xs text-slate-650 dark:text-slate-350">Leaking from the base indicates gasket decay or inner cylinder corrosion. We inspect gaskets, clean tank fittings, or recommend safe tank solutions.</p>
+          </div>
+        </div>
+        <!-- Issue 3 -->
+        <div class="bg-white dark:bg-slate-850 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-start space-x-4">
+          <div class="w-10 h-10 bg-indigo-100 dark:bg-indigo-900/50 text-indigo-650 dark:text-indigo-400 rounded-lg flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-triangle-exclamation"></i></div>
+          <div>
+            <h3 class="font-bold font-heading dark:text-white text-lg mb-1">Tripping the Circuit Breaker</h3>
+            <p class="text-xs text-slate-650 dark:text-slate-350">A breaker trip signals a ground fault or short circuit inside the heating chamber. We use multimeters to check coil insulation before restarting.</p>
+          </div>
+        </div>
+        <!-- Issue 4 -->
+        <div class="bg-white dark:bg-slate-850 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-start space-x-4">
+          <div class="w-10 h-10 bg-indigo-100 dark:bg-indigo-900/50 text-indigo-650 dark:text-indigo-400 rounded-lg flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-volume-high"></i></div>
+          <div>
+            <h3 class="font-bold font-heading dark:text-white text-lg mb-1">Rumbling or Popping Sounds</h3>
+            <p class="text-xs text-slate-650 dark:text-slate-350">Strange cracking sounds inside the tank are due to mineral scale buildup overheating local water pockets. Tank flushing and descaling removes this hazard.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Transparent Pricing Catalog -->
+    <section class="py-20 bg-slate-100 dark:bg-slate-850 transition-theme">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6">
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 shadow-md">
+          <div class="text-center max-w-md mx-auto mb-8">
+            <h2 class="text-2xl sm:text-3xl font-extrabold font-heading dark:text-white">Geyser Repairs Pricing Guide</h2>
+            <p class="text-slate-650 dark:text-slate-350 text-sm mt-2">Flat rates for replacement components, inclusive of safety grounding checks.</p>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm text-left">
+              <thead class="text-xs text-slate-450 uppercase border-b border-slate-200 dark:border-slate-800">
+                <tr>
+                  <th class="py-3">Repair Item / Service</th>
+                  <th class="py-3 text-center">Part Cost</th>
+                  <th class="py-3 text-center">Diagnostics</th>
+                  <th class="py-3 text-right">Total Price</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 dark:divide-slate-800 text-slate-700 dark:text-slate-300">
+                <tr>
+                  <td class="py-4 font-semibold">Heating Element Replacement (2kW / 3kW)</td>
+                  <td class="py-4 text-center text-slate-500">$24.00</td>
+                  <td class="py-4 text-center text-emerald-500">Waived</td>
+                  <td class="py-4 text-right font-bold text-indigo-650 dark:text-indigo-400">$39.00</td>
+                </tr>
+                <tr>
+                  <td class="py-4 font-semibold">Safety Cut-off Thermostat Calibration & Swap</td>
+                  <td class="py-4 text-center text-slate-500">$14.00</td>
+                  <td class="py-4 text-center text-emerald-500">Waived</td>
+                  <td class="py-4 text-right font-bold text-indigo-650 dark:text-indigo-400">$29.00</td>
+                </tr>
+                <tr>
+                  <td class="py-4 font-semibold">Safety Pressure Relief Valve Installation</td>
+                  <td class="py-4 text-center text-slate-500">$10.00</td>
+                  <td class="py-4 text-center text-emerald-500">Waived</td>
+                  <td class="py-4 text-right font-bold text-indigo-650 dark:text-indigo-400">$25.00</td>
+                </tr>
+                <tr>
+                  <td class="py-4 font-semibold">Complete Inner Tank Descaling & Flush</td>
+                  <td class="py-4 text-center text-slate-500">--</td>
+                  <td class="py-4 text-center text-emerald-500">Waived</td>
+                  <td class="py-4 text-right font-bold text-indigo-650 dark:text-indigo-400">$45.00</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="mt-6 p-4 bg-slate-50 dark:bg-slate-850 rounded-xl border border-slate-200 dark:border-slate-800 text-xs text-slate-500">
+            <p><strong>Note</strong>: Standard labor fees are already baked into the totals. No other hidden checkout fees apply. Waiver of diagnostics is guaranteed for all clients proceeding with parts replacement.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Technician Protocol Timeline -->
+    <section class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <h2 class="text-3xl font-extrabold font-heading dark:text-white">Our Geyser Service Workflow</h2>
+        <p class="text-slate-650 dark:text-slate-350 mt-4">Standard safety operations followed by our engineers inside your bathroom or our lab.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-6 text-center">
+        <div class="p-6 bg-white dark:bg-slate-850 rounded-xl border border-slate-200 dark:border-slate-800 space-y-3">
+          <span class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-sm mx-auto">1</span>
+          <h4 class="font-bold text-sm dark:text-white">Electrical Isolation</h4>
+          <p class="text-xs text-slate-500">Isolate power breakers, discharge residual current, test terminals.</p>
+        </div>
+        <div class="p-6 bg-white dark:bg-slate-850 rounded-xl border border-slate-200 dark:border-slate-800 space-y-3">
+          <span class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-sm mx-auto">2</span>
+          <h4 class="font-bold text-sm dark:text-white">Water Drainage</h4>
+          <p class="text-xs text-slate-500">Attach hose to drain outlet, exhaust the tank safely to prevent flooding.</p>
+        </div>
+        <div class="p-6 bg-white dark:bg-slate-850 rounded-xl border border-slate-200 dark:border-slate-800 space-y-3">
+          <span class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-sm mx-auto">3</span>
+          <h4 class="font-bold text-sm dark:text-white">Part Swap</h4>
+          <p class="text-xs text-slate-500">Unscrew element base flange, extract scale, mount genuine elements.</p>
+        </div>
+        <div class="p-6 bg-white dark:bg-slate-850 rounded-xl border border-slate-200 dark:border-slate-800 space-y-3">
+          <span class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-sm mx-auto">4</span>
+          <h4 class="font-bold text-sm dark:text-white">Calibration</h4>
+          <p class="text-xs text-slate-500">Configure thermostat setpoint to maximum 60&deg;C to prevent scaling.</p>
+        </div>
+        <div class="p-6 bg-white dark:bg-slate-850 rounded-xl border border-slate-200 dark:border-slate-800 space-y-3">
+          <span class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-sm mx-auto">5</span>
+          <h4 class="font-bold text-sm dark:text-white">Safety Test</h4>
+          <p class="text-xs text-slate-500">Ground continuity checks and insulation leakage resistance log.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5: Geyser FAQ Accordion -->
+    <section class="py-20 bg-slate-100 dark:bg-slate-850 transition-theme">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+          <h2 class="text-3xl font-extrabold font-heading dark:text-white">Geyser Repairs FAQ</h2>
+          <p class="text-slate-650 dark:text-slate-350 mt-2">Common answers regarding diagnostics, elements, and pressure relief valves.</p>
+        </div>
+
+        <div class="space-y-4">
+          <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm">
+            <button onclick="toggleFaq(1)" class="w-full p-5 text-left font-bold dark:text-white flex justify-between items-center focus:outline-none">
+              <span>How often should my hot water geyser be flushed?</span>
+              <i id="faq-icon-1" class="fa-solid fa-plus transition-transform"></i>
+            </button>
+            <div id="faq-answer-1" class="hidden p-5 border-t border-slate-100 dark:border-slate-800 text-sm text-slate-650 dark:text-slate-350">
+              We recommend descaling and flushing water heaters every 12 months, especially in hard water zones. This prevents scale crusts from blanketing the element, reducing heating speed, and risking cylinder corrosion.
+            </div>
+          </div>
+          <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm">
+            <button onclick="toggleFaq(2)" class="w-full p-5 text-left font-bold dark:text-white flex justify-between items-center focus:outline-none">
+              <span>Why is my geyser tripping the electrical circuit board?</span>
+              <i id="faq-icon-2" class="fa-solid fa-plus transition-transform"></i>
+            </button>
+            <div id="faq-answer-2" class="hidden p-5 border-t border-slate-100 dark:border-slate-800 text-sm text-slate-650 dark:text-slate-350">
+              A tripped breaker happens when the outer protective casing of the heating element splits, allowing water to touch the electrical coil inside. This triggers a short circuit or ground leakage, prompting the safety breaker to trip immediately. Always call a technician to check this.
+            </div>
+          </div>
+          <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm">
+            <button onclick="toggleFaq(3)" class="w-full p-5 text-left font-bold dark:text-white flex justify-between items-center focus:outline-none">
+              <span>Is my geyser repair covered by warranty?</span>
+              <i id="faq-icon-3" class="fa-solid fa-plus transition-transform"></i>
+            </button>
+            <div id="faq-answer-3" class="hidden p-5 border-t border-slate-100 dark:border-slate-800 text-sm text-slate-650 dark:text-slate-350">
+              Yes, all replacement geyser heating elements, safety valves, and thermostats fitted by VoltFix are covered by our standard 90-day parts and labor warranty.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 6: Dedicated Geyser Booking Widget -->
+    <section class="py-20 max-w-3xl mx-auto px-4 sm:px-6">
+      <div class="bg-white dark:bg-slate-850 border border-slate-200 dark:border-slate-800 rounded-2xl p-8 shadow-xl">
+        <div class="text-center max-w-md mx-auto mb-8">
+          <h2 class="text-2xl sm:text-3xl font-extrabold font-heading dark:text-white">Schedule Geyser Service</h2>
+          <p class="text-slate-450 text-sm mt-2">Get hot water flowing again. Fill out details to dispatch a heating engineer.</p>
+        </div>
+
+        <form id="geyser-booking-form" class="space-y-6">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-sm font-semibold text-slate-700 dark:text-slate-350 mb-2">Service Type</label>
+              <select required class="w-full px-4 py-2 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-lg focus:ring-indigo-500 focus:outline-none dark:text-white">
+                <option value="repair" selected>Heating Element & Component Repair</option>
+                <option value="descaling">Complete Tank Flushing & Descaling</option>
+                <option value="installation">Safety Valve Replacement</option>
+                <option value="inspection">Full Safety & Leakage Inspection</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-slate-700 dark:text-slate-350 mb-2">Service Method</label>
+              <select required class="w-full px-4 py-2 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-lg focus:ring-indigo-500 focus:outline-none dark:text-white">
+                <option value="home" selected>Home Service Dispatch (Recommended)</option>
+                <option value="pickup">Appliance Pickup & Lab Repair</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-sm font-semibold text-slate-700 dark:text-slate-350 mb-2">Preferred Appointment Date</label>
+              <input type="date" required class="w-full px-4 py-2 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-lg focus:ring-indigo-500 focus:outline-none dark:text-white">
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-slate-700 dark:text-slate-350 mb-2">Your Contact Number</label>
+              <input type="tel" placeholder="(555) 000-0000" required class="w-full px-4 py-2 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-lg focus:ring-indigo-500 focus:outline-none dark:text-white">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-semibold text-slate-700 dark:text-slate-350 mb-2">Problem Symptoms</label>
+            <textarea rows="3" placeholder="Tell us if the breaker trips, tank drips, or water is completely cold..." required class="w-full px-4 py-2 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-lg focus:ring-indigo-500 focus:outline-none dark:text-white"></textarea>
+          </div>
+
+          <button type="submit" class="w-full py-3 bg-indigo-650 hover:bg-indigo-600 text-white font-semibold rounded-lg shadow transition-all">Submit Geyser Repair Order</button>
+        </form>
+
+        <!-- Success Notification -->
+        <div id="geyser-success" class="hidden mt-6 bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 p-4 rounded-lg flex items-center space-x-3">
+          <i class="fa-solid fa-circle-check text-xl"></i>
+          <div>
+            <h4 class="font-bold">Geyser Service Ticket Registered!</h4>
+            <p class="text-xs">Our heating systems specialist will call you shortly to confirm the technician dispatch appointment schedule.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer (Common) -->
+  <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800 transition-theme">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div class="space-y-4">
+        <a href="index.html" class="flex items-center space-x-2 group">
+          <div class="w-10 h-10 bg-indigo-600 text-white rounded-lg flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+          </div>
+          <span class="text-xl font-bold font-heading tracking-tight bg-gradient-to-r from-indigo-600 to-blue-500 bg-clip-text text-transparent dark:from-indigo-400 dark:to-blue-400">VoltFix</span>
+        </a>
+        <p class="text-xs text-slate-500">Premium local electrical diagnostic and repair center for ceiling fans, irons, mixers, and geysers. Fast turnaround, transparent pricing.</p>
+        <div class="flex space-x-3 text-slate-500">
+          <a href="#" class="hover:text-indigo-400"><i class="fa-brands fa-facebook"></i></a>
+          <a href="#" class="hover:text-indigo-400"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#" class="hover:text-indigo-400"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="hover:text-indigo-400"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+      <div>
+        <h4 class="font-bold text-white mb-4 font-heading">Navigation</h4>
+        <ul class="space-y-2 text-sm">
+          <li><a href="index.html" class="hover:text-indigo-400">General Landing</a></li>
+          <li><a href="home2.html" class="hover:text-indigo-400">Subscription SaaS</a></li>
+          <li><a href="about.html" class="hover:text-indigo-400">About Us</a></li>
+          <li><a href="services.html" class="hover:text-indigo-400">Services</a></li>
+          <li><a href="guides.html" class="hover:text-indigo-400">Repair Guides</a></li>
+          <li><a href="contact.html" class="hover:text-indigo-400">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-bold text-white mb-4 font-heading">Services</h4>
+        <ul class="space-y-2 text-sm">
+          <li><a href="service-details.html" class="hover:text-indigo-400">Ceiling Fan Repair</a></li>
+          <li><a href="service-details.html" class="hover:text-indigo-400">Steam Iron Descaling</a></li>
+          <li><a href="service-details.html" class="hover:text-indigo-400">Mixer Motor Rewinding</a></li>
+          <li><a href="service-details.html" class="hover:text-indigo-400">Geyser Element Swap</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-bold text-white mb-4 font-heading">Operating Hours</h4>
+        <ul class="space-y-2 text-xs">
+          <li>Monday - Friday: <span class="text-slate-300">8:00 AM - 7:00 PM</span></li>
+          <li>Saturday: <span class="text-slate-300">9:00 AM - 5:00 PM</span></li>
+          <li>Sunday: <span class="text-red-400 font-semibold">Closed for Safety Audits</span></li>
+          <li class="pt-2 text-slate-500"><i class="fa-solid fa-location-dot mr-1"></i> 101 Spark Ave, Suite B, Electropolis</li>
+        </ul>
+      </div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-slate-800 mt-8 pt-8 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500">
+      <p>&copy; 2026 VoltFix Appliance Repairs. Crafted with electrical precision.</p>
+      <div class="flex space-x-4 mt-4 sm:mt-0">
+        <a href="#" class="hover:text-indigo-400">Privacy Policy</a>
+        <a href="#" class="hover:text-indigo-400">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- App Data & Logic -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  
+  <!-- Accordion Toggle Scripts -->
+  <script>
+    function toggleFaq(index) {
+      const ans = document.getElementById(`faq-answer-${index}`);
+      const icon = document.getElementById(`faq-icon-${index}`);
+      ans.classList.toggle("hidden");
+      if (ans.classList.contains("hidden")) {
+        icon.className = "fa-solid fa-plus transition-transform";
+      } else {
+        icon.className = "fa-solid fa-minus transition-transform";
+      }
+    }
+
+    // Submit handler
+    document.getElementById("geyser-booking-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      document.getElementById("geyser-booking-form").classList.add("hidden");
+      document.getElementById("geyser-success").classList.remove("hidden");
+    });
+  </script>
+</body>
+</html>
