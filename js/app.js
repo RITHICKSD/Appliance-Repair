@@ -10,66 +10,88 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // 1. Theme Switcher (Dark/Light)
 function initTheme() {
-  const currentTheme = localStorage.getItem("voltfix-theme") || "light";
+  const currentTheme = localStorage.getItem("voltfix-theme") || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
   applyTheme(currentTheme);
 
-  // Wire both header toggle (kept hidden) and mobile drawer toggle
-  ["theme-toggle", "mobile-theme-btn"].forEach(id => {
-    const btn = document.getElementById(id);
-    if (btn) {
-      btn.addEventListener("click", () => {
-        const activeTheme = document.documentElement.classList.contains("dark") ? "light" : "dark";
-        localStorage.setItem("voltfix-theme", activeTheme);
-        applyTheme(activeTheme);
-      });
+  // Delegate click for any theme toggle button (header desktop, header mobile, drawer toggle)
+  document.addEventListener("click", (e) => {
+    const toggleBtn = e.target.closest("#theme-toggle, #mobile-theme-btn, .theme-toggle-btn");
+    if (toggleBtn) {
+      e.preventDefault();
+      const activeTheme = document.documentElement.classList.contains("dark") ? "light" : "dark";
+      localStorage.setItem("voltfix-theme", activeTheme);
+      applyTheme(activeTheme);
     }
   });
 }
 
 function applyTheme(theme) {
-  const themeToggleBtn = document.getElementById("theme-toggle");
-  const mobileThemeBtn = document.getElementById("mobile-theme-btn");
+  const themeToggleBtns = document.querySelectorAll("#theme-toggle, #mobile-theme-btn, .theme-toggle-btn");
+
+  const darkIcon = `
+    <svg class="w-5 h-5 text-amber-400 transition-transform duration-300 hover:rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="12" cy="12" r="5" stroke-width="2"></circle>
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42m12.72-12.72l1.42-1.42"></path>
+    </svg>
+  `;
+  const lightIcon = `
+    <svg class="w-5 h-5 text-slate-700 dark:text-slate-300 transition-transform duration-300 hover:-rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+    </svg>
+  `;
+
   if (theme === "dark") {
     document.documentElement.classList.add("dark");
-    const darkIcon = `
-        <svg class="w-5 h-5 text-amber-400 transition-transform duration-300 hover:rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="12" cy="12" r="5" stroke-width="2"></circle>
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42m12.72-12.72l1.42-1.42"></path>
-        </svg>
-      `;
-    if (themeToggleBtn) themeToggleBtn.innerHTML = darkIcon;
-    if (mobileThemeBtn) mobileThemeBtn.innerHTML = darkIcon;
   } else {
     document.documentElement.classList.remove("dark");
-    const lightIcon = `
-        <svg class="w-5 h-5 text-slate-700 dark:text-slate-300 transition-transform duration-300 hover:-rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
-        </svg>
-      `;
-    if (themeToggleBtn) themeToggleBtn.innerHTML = lightIcon;
-    if (mobileThemeBtn) mobileThemeBtn.innerHTML = lightIcon;
   }
+
+  themeToggleBtns.forEach((btn) => {
+    const iconSpan = btn.querySelector(".theme-toggle-icon");
+    const textSpan = btn.querySelector(".theme-toggle-text");
+
+    if (theme === "dark") {
+      if (iconSpan) {
+        iconSpan.innerHTML = darkIcon;
+      } else {
+        btn.innerHTML = darkIcon;
+      }
+      if (textSpan) textSpan.textContent = "Dark";
+      btn.setAttribute("aria-label", "Switch to light mode");
+      btn.setAttribute("title", "Switch to light mode");
+    } else {
+      if (iconSpan) {
+        iconSpan.innerHTML = lightIcon;
+      } else {
+        btn.innerHTML = lightIcon;
+      }
+      if (textSpan) textSpan.textContent = "Light";
+      btn.setAttribute("aria-label", "Switch to dark mode");
+      btn.setAttribute("title", "Switch to dark mode");
+    }
+  });
 }
 
 // 2. Direction Switcher (LTR/RTL)
 function initDirection() {
-  const rtlToggleBtn = document.getElementById("rtl-toggle");
-  if (!rtlToggleBtn) return;
-
   const currentDir = localStorage.getItem("voltfix-dir") || "ltr";
   applyDirection(currentDir);
 
-  rtlToggleBtn.addEventListener("click", () => {
-    const activeDir = document.documentElement.getAttribute("dir") === "rtl" ? "ltr" : "rtl";
-    localStorage.setItem("voltfix-dir", activeDir);
-    applyDirection(activeDir);
+  document.addEventListener("click", (e) => {
+    const rtlBtn = e.target.closest("#rtl-toggle, #mobile-rtl-toggle");
+    if (rtlBtn) {
+      e.preventDefault();
+      const activeDir = document.documentElement.getAttribute("dir") === "rtl" ? "ltr" : "rtl";
+      localStorage.setItem("voltfix-dir", activeDir);
+      applyDirection(activeDir);
+    }
   });
 }
 
 function applyDirection(dir) {
-  const rtlToggleBtn = document.getElementById("rtl-toggle");
   const rtlTextSpan = document.getElementById("rtl-text");
   const mobileRtlText = document.getElementById("mobile-rtl-text");
+  const drawer = document.getElementById("mobile-drawer");
 
   document.documentElement.setAttribute("dir", dir);
 
@@ -77,10 +99,24 @@ function applyDirection(dir) {
     document.documentElement.classList.add("rtl-mode");
     if (rtlTextSpan) rtlTextSpan.textContent = "RTL";
     if (mobileRtlText) mobileRtlText.textContent = "RTL";
+    // In RTL, drawer slides from left
+    if (drawer) {
+      drawer.style.right = "auto";
+      drawer.style.left = "0";
+      drawer.style.borderLeft = "none";
+      drawer.style.borderRight = "1px solid rgba(226, 232, 240, 0.5)";
+    }
   } else {
     document.documentElement.classList.remove("rtl-mode");
     if (rtlTextSpan) rtlTextSpan.textContent = "LTR";
     if (mobileRtlText) mobileRtlText.textContent = "LTR";
+    // In LTR, drawer slides from right
+    if (drawer) {
+      drawer.style.right = "0";
+      drawer.style.left = "auto";
+      drawer.style.borderRight = "none";
+      drawer.style.borderLeft = "1px solid rgba(226, 232, 240, 0.5)";
+    }
   }
 }
 
@@ -91,19 +127,25 @@ function initDropdowns() {
 
   if (!homeDropdownBtn || !homeDropdownMenu) return;
 
+  const chevron = homeDropdownBtn.querySelector(".fa-chevron-down") || document.getElementById("home-chevron");
+
   homeDropdownBtn.addEventListener("click", (e) => {
     e.stopPropagation();
-    homeDropdownMenu.classList.toggle("hidden");
-    homeDropdownMenu.classList.toggle("opacity-0");
-    homeDropdownMenu.classList.toggle("translate-y-2");
+    const isHidden = homeDropdownMenu.classList.contains("hidden");
+    if (isHidden) {
+      homeDropdownMenu.classList.remove("hidden", "opacity-0", "translate-y-2");
+      if (chevron) chevron.classList.add("rotate-180");
+    } else {
+      homeDropdownMenu.classList.add("hidden");
+      if (chevron) chevron.classList.remove("rotate-180");
+    }
   });
 
   // Close dropdown when clicking outside
   document.addEventListener("click", (e) => {
     if (!homeDropdownBtn.contains(e.target) && !homeDropdownMenu.contains(e.target)) {
       homeDropdownMenu.classList.add("hidden");
-      homeDropdownMenu.classList.add("opacity-0");
-      homeDropdownMenu.classList.add("translate-y-2");
+      if (chevron) chevron.classList.remove("rotate-180");
     }
   });
 }
@@ -129,27 +171,29 @@ function initMobileHomeAccordion() {
   });
 }
 
-// 4. Mobile Menu Drawer
+// 4. Mobile Menu Drawer Management
 function initMobileMenu() {
-  const mobileMenuBtn = document.getElementById("mobile-menu-btn");
-  const mobileMenuCloseBtn = document.getElementById("mobile-menu-close-btn");
-  const mobileDrawer = document.getElementById("mobile-drawer");
-  const mobileDrawerOverlay = document.getElementById("mobile-drawer-overlay");
+  const openBtn = document.getElementById("mobile-menu-btn");
+  const closeBtn = document.getElementById("mobile-menu-close-btn");
+  const overlay = document.getElementById("mobile-drawer-overlay");
+  const drawer = document.getElementById("mobile-drawer");
 
-  if (!mobileMenuBtn || !mobileDrawer) return;
+  if (!openBtn || !drawer || !overlay) return;
 
-  const toggleMobileMenu = () => {
-    mobileDrawer.classList.toggle("translate-x-full");
-    if (mobileDrawerOverlay) mobileDrawerOverlay.classList.toggle("hidden");
-  };
-
-  mobileMenuBtn.addEventListener("click", toggleMobileMenu);
-
-  if (mobileMenuCloseBtn) {
-    mobileMenuCloseBtn.addEventListener("click", toggleMobileMenu);
+  function openMenu() {
+    overlay.classList.remove("hidden");
+    drawer.classList.remove("translate-x-full", "-translate-x-full");
+    drawer.classList.add("translate-x-0");
   }
 
-  if (mobileDrawerOverlay) {
-    mobileDrawerOverlay.addEventListener("click", toggleMobileMenu);
+  function closeMenu() {
+    drawer.classList.remove("translate-x-0");
+    const isRtl = document.documentElement.getAttribute("dir") === "rtl";
+    drawer.classList.add(isRtl ? "-translate-x-full" : "translate-x-full");
+    setTimeout(() => overlay.classList.add("hidden"), 280);
   }
+
+  openBtn.addEventListener("click", openMenu);
+  if (closeBtn) closeBtn.addEventListener("click", closeMenu);
+  overlay.addEventListener("click", closeMenu);
 }

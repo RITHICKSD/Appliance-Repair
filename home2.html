@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VoltFix - Subscription Appliance Protection & Maintenance Plans</title>
-  <meta name="description" content="Never pay full price for appliance repairs. Select a VoltFix subscription care plan for ceiling fans, mixer-grinders, and geysers. Preventive coverage starting at $19/mo.">
+  <title>VoltFix - Subscription Appliance Care Plans & Protection</title>
+  <meta name="description" content="Never pay full price for emergency repairs. Choose a VoltFix subscription plan for ceiling fans, mixer-grinders, and geysers. Care coverage starting at $19/mo.">
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -23,8 +23,7 @@
               650: '#475569',
               750: '#334155',
               805: '#1e293b',
-              808: '#1e293b',
-              850: '#1e293b',
+              850: '#0f172a',
             },
             indigo: {
               150: '#e0e7ff',
@@ -33,6 +32,13 @@
           }
         }
       }
+    }
+  </script>
+  <script>
+    if (localStorage.getItem('voltfix-theme') === 'dark' || (!('voltfix-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
     }
   </script>
   <!-- Favicon -->
@@ -44,101 +50,147 @@
 </head>
 <body class="bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-100 min-h-screen flex flex-col transition-theme">
 
-  <!-- Header (Common) -->
-  <header class="sticky top-0 z-50 w-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-theme">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+  <!-- ===================== HEADER ===================== -->
+  <header class="fixed top-0 left-0 right-0 z-50 w-full bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-sm transition-theme">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+
       <!-- Logo -->
-      <a href="index.html" class="flex items-center space-x-2 group">
-        <div class="w-10 h-10 bg-indigo-600 text-white rounded-lg flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-          </svg>
+      <a href="index.html" class="flex items-center gap-3 group flex-shrink-0">
+        <div class="w-11 h-11 bg-gradient-to-tr from-indigo-600 to-blue-500 text-white rounded-xl flex items-center justify-center shadow-md group-hover:scale-105 transition-transform">
+          <i class="fa-solid fa-bolt text-xl"></i>
         </div>
-        <span class="text-xl font-bold font-heading tracking-tight bg-gradient-to-r from-indigo-600 to-blue-500 bg-clip-text text-transparent dark:from-indigo-400 dark:to-blue-400">VoltFix</span>
+        <div class="flex flex-col leading-none">
+          <span class="text-2xl font-black font-heading tracking-tight bg-gradient-to-r from-indigo-600 to-blue-600 bg-clip-text text-transparent dark:from-indigo-400 dark:to-blue-400">VoltFix</span>
+          <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Appliance Repair</span>
+        </div>
       </a>
 
-      <!-- Desktop Navigation -->
-      <nav class="hidden md:flex items-center space-x-8 font-medium">
-        <div class="relative">
-          <button id="home-dropdown-btn" class="flex items-center space-x-1 text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 focus:outline-none">
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-6 font-medium text-sm">
+        <!-- Home Dropdown -->
+        <div class="relative" id="home-dropdown-wrapper">
+          <button id="home-dropdown-btn" class="flex items-center gap-1.5 text-indigo-600 dark:text-indigo-400 font-bold focus:outline-none py-2 hover:text-indigo-500 transition-colors">
             <span>Home</span>
-            <i class="fa-solid fa-chevron-down text-xs transition-transform duration-205"></i>
+            <i class="fa-solid fa-chevron-down text-xs transition-transform duration-200" id="home-chevron"></i>
           </button>
-          <div id="home-dropdown-menu" class="hidden absolute top-full left-0 mt-2 w-48 bg-white dark:bg-slate-850 rounded-lg shadow-xl border border-slate-200 dark:border-slate-750 py-2 opacity-0 translate-y-2 transition-all z-50">
-            <a href="index.html" class="block px-4 py-2 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">Home 1</a>
-            <a href="home2.html" class="block px-4 py-2 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">Home 2</a>
+          <div id="home-dropdown-menu" class="hidden absolute top-full left-0 mt-1 w-52 bg-white dark:bg-slate-850 rounded-xl shadow-xl border border-slate-200 dark:border-slate-800 py-2 z-50">
+            <a href="index.html" class="flex items-center gap-2 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+              <i class="fa-solid fa-house text-xs"></i> Home 1 (General Repair)
+            </a>
+            <a href="home2.html" class="flex items-center gap-2 px-4 py-2.5 text-sm font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40">
+              <i class="fa-solid fa-shield-halved text-xs"></i> Home 2 (SaaS Care Plan)
+            </a>
           </div>
         </div>
-        <a href="about.html" class="text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400">About</a>
-        <a href="services.html" class="text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400">Services</a>
-        <a href="pricing.html" class="text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400">Pricing</a>
-        <a href="guides.html" class="text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400">Repair Guides</a>
-        <a href="contact.html" class="text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400">Contact</a>
+        <a href="about.html" class="text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">About</a>
+        <a href="services.html" class="text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Services</a>
+        <a href="pricing.html" class="text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Pricing</a>
+        <a href="guides.html" class="text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Guides</a>
+        <a href="contact.html" class="text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Contact</a>
       </nav>
 
-      <!-- Right Utility Actions -->
-      <div class="flex items-center space-x-3">
-
-        <!-- RTL/LTR Toggle -->
-        <button id="rtl-toggle" class="w-12 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-700 transition-theme focus:outline-none font-bold text-xs">
+      <!-- Right CTAs (Desktop) -->
+      <div class="hidden md:flex items-center gap-3">
+        <a href="tel:18005550199" class="flex items-center gap-2 text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 font-semibold text-sm transition-colors">
+          <div class="w-9 h-9 rounded-full bg-indigo-50 dark:bg-slate-800 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
+            <i class="fa-solid fa-phone text-sm"></i>
+          </div>
+          <span class="hidden lg:inline">(800) 555-0199</span>
+        </a>
+        <a href="#subscribe" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-lg shadow-md hover:shadow-indigo-500/30 transition-all text-sm flex items-center gap-2">
+          <i class="fa-solid fa-shield-cat"></i>
+          <span>Get Care Plan</span>
+        </a>
+        <!-- Theme Toggle -->
+        <button id="theme-toggle" class="w-10 h-9 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-700 transition-all text-slate-700 dark:text-slate-200" title="Toggle Theme" aria-label="Toggle Theme">
+        </button>
+        <!-- RTL Toggle -->
+        <button id="rtl-toggle" class="w-12 h-9 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-700 transition-all font-bold text-xs text-slate-700 dark:text-slate-200" title="Toggle Direction">
           <span id="rtl-text">LTR</span>
         </button>
+      </div>
 
-        <!-- Mobile Menu Btn -->
-        <button id="mobile-menu-btn" class="md:hidden w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-700 transition-theme focus:outline-none">
-          <i class="fa-solid fa-bars text-lg text-slate-700 dark:text-slate-200"></i>
+      <!-- Mobile Actions (md:hidden) -->
+      <div class="flex md:hidden items-center gap-2">
+        <button id="mobile-theme-btn" class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-700 dark:text-slate-200 focus:outline-none" title="Toggle Theme" aria-label="Toggle Theme">
+        </button>
+        <button id="mobile-menu-btn" class="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-slate-800 flex items-center justify-center text-indigo-600 dark:text-indigo-400 focus:outline-none" aria-label="Open Menu">
+          <i class="fa-solid fa-bars text-xl"></i>
         </button>
       </div>
     </div>
   </header>
 
-  <!-- Mobile Drawer Menu -->
-  <div id="mobile-drawer-overlay" class="hidden fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50"></div>
-  <div id="mobile-drawer" class="fixed top-0 right-0 bottom-0 w-80 bg-white dark:bg-slate-900 max-w-full shadow-2xl z-50 transform translate-x-full transition-transform duration-300 border-l border-slate-200 dark:border-slate-800 p-6 flex flex-col justify-between">
-    <div>
-      <div class="flex items-center justify-between pb-6 border-b border-slate-200 dark:border-slate-800">
-        <span class="text-lg font-bold font-heading text-indigo-600 dark:text-indigo-400">VoltFix Nav Menu</span>
-        <button id="mobile-menu-close-btn" class="w-8 h-8 rounded-full flex items-center justify-center bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700">
-          <i class="fa-solid fa-xmark text-slate-650 dark:text-slate-350"></i>
+  <!-- ===================== MOBILE DRAWER (mobile only) ===================== -->
+  <div id="mobile-drawer-overlay" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[60]"></div>
+  <div id="mobile-drawer" class="fixed top-0 right-0 bottom-0 w-80 max-w-full bg-white dark:bg-slate-900 shadow-2xl z-[70] transform translate-x-full transition-transform duration-300 border-l border-slate-200 dark:border-slate-800 flex flex-col">
+    <!-- Drawer Header -->
+    <div class="flex items-center justify-between p-6 border-b border-slate-200 dark:border-slate-800">
+      <div class="flex items-center gap-2">
+        <div class="w-9 h-9 bg-indigo-600 text-white rounded-lg flex items-center justify-center">
+          <i class="fa-solid fa-bolt"></i>
+        </div>
+        <span class="text-xl font-bold font-heading text-indigo-600 dark:text-indigo-400">VoltFix</span>
+      </div>
+      <button id="mobile-menu-close-btn" class="w-8 h-8 rounded-full flex items-center justify-center bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors" aria-label="Close Menu">
+        <i class="fa-solid fa-xmark text-slate-600 dark:text-slate-300"></i>
+      </button>
+    </div>
+
+    <!-- Drawer Nav Links -->
+    <div class="flex flex-col flex-grow overflow-y-auto p-6 gap-1">
+      <!-- Home Accordion -->
+      <div>
+        <button id="mobile-home-acc-btn" class="flex items-center justify-between w-full text-left py-3 px-3 rounded-lg font-bold text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-slate-800 focus:outline-none transition-colors">
+          <span>Home Options</span>
+          <i id="mobile-home-acc-icon" class="fa-solid fa-chevron-right text-xs transition-transform duration-200"></i>
+        </button>
+        <div id="mobile-home-acc-sub" class="hidden flex-col pl-4 mt-1 space-y-1 border-l-2 border-indigo-400 ml-3">
+          <a href="index.html" class="py-2 px-2 text-sm text-slate-600 dark:text-slate-400 hover:text-indigo-600 block rounded hover:bg-indigo-50 dark:hover:bg-slate-800">Home 1 (General Repair)</a>
+          <a href="home2.html" class="py-2 px-2 text-sm font-bold text-indigo-600 dark:text-indigo-400 block rounded hover:bg-indigo-50 dark:hover:bg-slate-800">Home 2 (SaaS Care Plan)</a>
+        </div>
+      </div>
+      <a href="about.html" class="py-3 px-3 rounded-lg text-slate-700 dark:text-slate-200 hover:text-indigo-600 hover:bg-indigo-50 dark:hover:bg-slate-800 font-medium transition-colors">About Us</a>
+      <a href="services.html" class="py-3 px-3 rounded-lg text-slate-700 dark:text-slate-200 hover:text-indigo-600 hover:bg-indigo-50 dark:hover:bg-slate-800 font-medium transition-colors">Services</a>
+      <a href="pricing.html" class="py-3 px-3 rounded-lg text-slate-700 dark:text-slate-200 hover:text-indigo-600 hover:bg-indigo-50 dark:hover:bg-slate-800 font-medium transition-colors">Pricing</a>
+      <a href="guides.html" class="py-3 px-3 rounded-lg text-slate-700 dark:text-slate-200 hover:text-indigo-600 hover:bg-indigo-50 dark:hover:bg-slate-800 font-medium transition-colors">Repair Guides</a>
+      <a href="contact.html" class="py-3 px-3 rounded-lg text-slate-700 dark:text-slate-200 hover:text-indigo-600 hover:bg-indigo-50 dark:hover:bg-slate-800 font-medium transition-colors">Contact Us</a>
+
+      <!-- Mobile Theme & RTL toggle -->
+      <div class="mt-4 pt-4 border-t border-slate-200 dark:border-slate-800 space-y-2">
+        <button class="theme-toggle-btn w-full py-2.5 px-4 bg-slate-100 dark:bg-slate-800 rounded-lg font-bold text-sm text-slate-700 dark:text-slate-200 flex items-center justify-between hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+          <span class="flex items-center gap-2">
+            <span class="theme-toggle-icon flex items-center"></span>
+            <span>Theme Mode</span>
+          </span>
+          <span class="text-xs font-semibold px-2 py-0.5 rounded bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 theme-toggle-text">Light</span>
+        </button>
+        <button id="mobile-rtl-toggle" class="w-full py-2.5 px-4 bg-slate-100 dark:bg-slate-800 rounded-lg font-bold text-sm text-slate-700 dark:text-slate-200 flex items-center justify-between hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+          <span class="flex items-center gap-2">
+            <i class="fa-solid fa-language text-indigo-500"></i>
+            <span>Direction</span>
+          </span>
+          <span id="mobile-rtl-text" class="text-xs font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700">LTR</span>
         </button>
       </div>
-      <div class="flex flex-col py-6 space-y-2 font-medium">
-        <!-- Home Accordion -->
-        <div>
-          <button id="mobile-home-acc-btn" class="flex items-center justify-between w-full text-left text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 py-2 min-h-0 bg-transparent border-0 p-0 focus:outline-none">
-            <span>Home</span>
-            <i id="mobile-home-acc-icon" class="fa-solid fa-chevron-right text-xs transition-transform duration-200"></i>
-          </button>
-          <div id="mobile-home-acc-sub" class="hidden flex-col pl-3 mt-1 pb-1 space-y-1 border-l-2 border-slate-200 dark:border-slate-700">
-            <a href="index.html" class="text-sm text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 py-1.5 block">Home 1</a>
-            <a href="home2.html" class="text-sm text-indigo-600 dark:text-indigo-400 font-semibold py-1.5 block">Home 2</a>
-          </div>
-        </div>
-        <a href="about.html" class="text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 py-2">About Us</a>
-        <a href="services.html" class="text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 py-2">Our Services</a>
-        <a href="pricing.html" class="text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 py-2">Pricing</a>
-        <a href="guides.html" class="text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 py-2">Repair Guides</a>
-        <a href="contact.html" class="text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 py-2">Contact Us</a>
-        <!-- Appearance Toggles -->
-        <div class="flex items-center gap-3 pt-3 mt-1 border-t border-slate-200 dark:border-slate-800">
-          <button id="mobile-theme-btn" onclick="document.getElementById('theme-toggle').click()" class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-700 transition-theme min-h-0" title="Toggle Theme">
-          </button>
-          <button onclick="document.getElementById('rtl-toggle').click()" class="w-12 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-700 transition-theme font-bold text-xs text-slate-700 dark:text-slate-200 min-h-0">
-            <span id="mobile-rtl-text">LTR</span>
-          </button>
-        </div>
-      </div>
     </div>
-    <div class="pt-6 border-t border-slate-200 dark:border-slate-800">
-      <p class="text-xs text-slate-400 text-center">&copy; 2026 VoltFix Repairs. All rights reserved.</p>
+
+    <!-- Drawer Footer CTAs -->
+    <div class="p-6 border-t border-slate-200 dark:border-slate-800 space-y-3">
+      <a href="tel:18005550199" class="w-full py-3 bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-white font-bold rounded-lg flex items-center justify-center gap-2 text-sm hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+        <i class="fa-solid fa-phone text-indigo-600 dark:text-indigo-400"></i> (800) 555-0199
+      </a>
+      <a href="#subscribe" id="mobile-book-btn" class="w-full py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-lg flex items-center justify-center gap-2 text-sm transition-colors">
+        <i class="fa-solid fa-shield-cat"></i> Get Care Plan
+      </a>
     </div>
   </div>
 
-  <!-- Main Content - Home 2 SaaS Subscription (6 Sections) -->
+  <!-- Main Content - Home 2 SaaS Subscription (Exclusively 5 Structured Sections) -->
   <main class="flex-grow">
 
-    <!-- Section 1: SaaS Hero Banner -->
-    <section class="bg-gradient-to-br from-indigo-950 via-slate-900 to-indigo-900 text-white py-14 sm:py-20 lg:py-24 relative transition-theme overflow-hidden">
+    <!-- SECTION 1: SaaS Care Hero Banner -->
+    <section class="bg-gradient-to-br from-indigo-950 via-slate-900 to-indigo-900 text-white py-16 sm:py-24 relative overflow-hidden">
       <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-indigo-600/10 via-transparent to-transparent"></div>
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
         <div class="space-y-5 sm:space-y-6 text-center lg:text-left rtl:lg:text-right">
@@ -151,15 +203,15 @@
             Secure priority electrical repair dispatches, annual descaling checkups, and zero diagnostic fees with our low-cost monthly appliance subscription protection.
           </p>
           <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-3 sm:gap-4">
-            <a href="#plans" class="px-6 sm:px-8 py-3 sm:py-4 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-lg shadow-lg hover:shadow-indigo-500/35 transition-all text-center text-sm sm:text-base">Choose Your Protection</a>
-            <a href="#calculator" class="px-6 sm:px-8 py-3 sm:py-4 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold rounded-lg transition-all text-center text-sm sm:text-base">Coverage Estimator</a>
+            <a href="#plans" class="px-6 sm:px-8 py-3.5 sm:py-4 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl shadow-lg shadow-indigo-500/35 transition-all text-center text-sm sm:text-base">Choose Your Protection</a>
+            <a href="#calculator" class="px-6 sm:px-8 py-3.5 sm:py-4 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold rounded-xl transition-all text-center text-sm sm:text-base">Coverage Estimator</a>
           </div>
         </div>
         <div class="relative hidden lg:flex justify-center lg:justify-end">
-          <div class="bg-slate-800/60 backdrop-blur border border-slate-700/50 p-6 rounded-2xl w-full max-w-lg shadow-2xl space-y-4">
+          <div class="bg-slate-800/80 backdrop-blur border border-slate-700/50 p-6 rounded-2xl w-full max-w-lg shadow-2xl space-y-4">
             <div class="flex items-center justify-between pb-3 border-b border-slate-700/50">
               <span class="text-sm text-slate-300 font-bold"><i class="fa-solid fa-gauge mr-2"></i> Care Subscription Dashboard</span>
-              <span class="px-2 py-0.5 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full border border-emerald-500/30">Active</span>
+              <span class="px-2.5 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-bold rounded-full border border-emerald-500/30">Active</span>
             </div>
             <div class="grid grid-cols-2 gap-4">
               <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-750">
@@ -172,7 +224,7 @@
               </div>
             </div>
             <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-750 space-y-2">
-              <span class="text-xs text-slate-450 block font-semibold">Active Dispatch Status</span>
+              <span class="text-xs text-slate-400 block font-semibold">Active Dispatch Status</span>
               <div class="flex items-center justify-between text-xs pt-1">
                 <span class="text-slate-300"><i class="fa-solid fa-circle-check text-emerald-400 mr-1.5"></i> Annual Geyser Service Completed</span>
                 <span class="text-slate-500">2 Weeks Ago</span>
@@ -187,138 +239,124 @@
       </div>
     </section>
 
-    <!-- Section 2: Subscription Pricing Matrix -->
-    <section id="plans" class="py-14 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-16">
-        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold font-heading tracking-tight dark:text-white">VoltFix Subscription Tiers</h2>
+    <!-- SECTION 2: Subscription Care Pricing Tiers -->
+    <section id="plans" class="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
+        <h2 class="text-3xl sm:text-4xl font-black font-heading tracking-tight dark:text-white">VoltFix Subscription Care Tiers</h2>
         <p class="text-slate-650 dark:text-slate-350 mt-3 sm:mt-4 text-sm sm:text-base">Predictable monthly options designed to eliminate high diagnostic and emergency repair costs completely.</p>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
         <!-- Tier 1 -->
         <div class="bg-white dark:bg-slate-850 p-8 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl transition-all flex flex-col justify-between relative">
           <div>
             <h3 class="text-lg font-bold font-heading text-slate-400 uppercase tracking-widest mb-2">Starter Appliance</h3>
-            <p class="text-3xl font-extrabold dark:text-white">$19<span class="text-sm font-normal text-slate-450">/month</span></p>
+            <p class="text-4xl font-black dark:text-white">$19<span class="text-sm font-normal text-slate-400">/month</span></p>
             <p class="text-slate-500 text-xs mt-2 mb-6">Perfect for small households targeting critical device protection.</p>
             <ul class="space-y-3 text-sm text-slate-650 dark:text-slate-350 border-t border-slate-100 dark:border-slate-800 pt-6 mb-8">
               <li><i class="fa-solid fa-check text-indigo-500 mr-2"></i> Covers 2 ceiling fans & 1 dry iron</li>
-              <li><i class="fa-solid fa-check text-indigo-500 mr-2"></i> $0 diagnostics (Normally $15)</li>
+              <li><i class="fa-solid fa-check text-indigo-500 mr-2"></i> $0 diagnostics (Normally $19)</li>
               <li><i class="fa-solid fa-check text-indigo-500 mr-2"></i> Standard repair turnaround (24-48h)</li>
-              <li class="text-slate-400 line-through"><i class="fa-solid fa-xmark mr-2"></i> Priority dispatcher routing</li>
-              <li class="text-slate-400 line-through"><i class="fa-solid fa-xmark mr-2"></i> Complimentary annual geyser flush</li>
             </ul>
           </div>
-          <a href="#subscribe" onclick="selectTier('starter')" class="w-full py-3 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-semibold rounded-lg transition-all text-center">Subscribe Now</a>
+          <a href="#subscribe" onclick="selectTier('starter')" class="w-full py-3.5 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold rounded-xl transition-all text-center">Subscribe Now</a>
         </div>
 
         <!-- Tier 2 (Recommended) -->
         <div class="bg-white dark:bg-slate-850 p-8 rounded-2xl border-2 border-indigo-600 dark:border-indigo-400 shadow-xl flex flex-col justify-between relative">
-          <span class="absolute top-0 right-1/2 translate-x-1/2 -translate-y-1/2 bg-indigo-650 text-white font-bold text-xs px-4 py-1.5 rounded-full uppercase tracking-wider shadow">Recommended Plan</span>
+          <span class="absolute top-0 right-1/2 translate-x-1/2 -translate-y-1/2 bg-indigo-600 text-white font-bold text-xs px-4 py-1.5 rounded-full uppercase tracking-wider shadow">Recommended Plan</span>
           <div>
             <h3 class="text-lg font-bold font-heading text-indigo-600 dark:text-indigo-400 uppercase tracking-widest mb-2">Home Pro Care</h3>
-            <p class="text-3xl font-extrabold dark:text-white">$39<span class="text-sm font-normal text-slate-450">/month</span></p>
+            <p class="text-4xl font-black dark:text-white">$39<span class="text-sm font-normal text-slate-400">/month</span></p>
             <p class="text-slate-500 text-xs mt-2 mb-6">Complete peace-of-mind covering all essential small and large appliances.</p>
             <ul class="space-y-3 text-sm text-slate-650 dark:text-slate-350 border-t border-slate-100 dark:border-slate-800 pt-6 mb-8">
               <li><i class="fa-solid fa-check text-indigo-500 mr-2"></i> Covers unlimited fans, irons, mixers</li>
               <li><i class="fa-solid fa-check text-indigo-500 mr-2"></i> Full storage/instant geyser protection</li>
               <li><i class="fa-solid fa-check text-indigo-500 mr-2"></i> Priority 12-hour dispatcher routing</li>
               <li><i class="fa-solid fa-check text-indigo-500 mr-2"></i> Free annual geyser inspection & descaling</li>
-              <li><i class="fa-solid fa-check text-indigo-500 mr-2"></i> 10% discount on replacement parts</li>
             </ul>
           </div>
-          <a href="#subscribe" onclick="selectTier('pro')" class="w-full py-3 bg-indigo-650 hover:bg-indigo-600 text-white font-semibold rounded-lg shadow transition-all text-center">Subscribe Now</a>
+          <a href="#subscribe" onclick="selectTier('pro')" class="w-full py-3.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl shadow transition-all text-center">Subscribe Now</a>
         </div>
 
         <!-- Tier 3 -->
         <div class="bg-white dark:bg-slate-850 p-8 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl transition-all flex flex-col justify-between relative">
           <div>
             <h3 class="text-lg font-bold font-heading text-slate-400 uppercase tracking-widest mb-2">Commercial Fleet</h3>
-            <p class="text-3xl font-extrabold dark:text-white">$99<span class="text-sm font-normal text-slate-450">/month</span></p>
+            <p class="text-4xl font-black dark:text-white">$99<span class="text-sm font-normal text-slate-400">/month</span></p>
             <p class="text-slate-500 text-xs mt-2 mb-6">Designed for landlords, property management firms, and office campuses.</p>
             <ul class="space-y-3 text-sm text-slate-650 dark:text-slate-350 border-t border-slate-100 dark:border-slate-800 pt-6 mb-8">
               <li><i class="fa-solid fa-check text-indigo-500 mr-2"></i> Coverage for all devices at up to 5 properties</li>
               <li><i class="fa-solid fa-check text-indigo-500 mr-2"></i> Instant 2-hour diagnostics callback</li>
               <li><i class="fa-solid fa-check text-indigo-500 mr-2"></i> Dedicated account engineer assigned</li>
-              <li><i class="fa-solid fa-check text-indigo-500 mr-2"></i> Automated ticketing system API integrations</li>
-              <li><i class="fa-solid fa-check text-indigo-500 mr-2"></i> Monthly consolidated invoicing</li>
             </ul>
           </div>
-          <a href="#subscribe" onclick="selectTier('fleet')" class="w-full py-3 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-semibold rounded-lg transition-all text-center">Subscribe Now</a>
+          <a href="#subscribe" onclick="selectTier('fleet')" class="w-full py-3.5 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold rounded-xl transition-all text-center">Subscribe Now</a>
         </div>
       </div>
     </section>
 
-    <!-- Section 3: Interactive Coverage Cost Calculator -->
-    <section id="calculator" class="py-20 bg-slate-100 dark:bg-slate-850 transition-theme">
+    <!-- SECTION 3: Interactive Custom Coverage Estimator -->
+    <section id="calculator" class="py-16 sm:py-24 bg-slate-100 dark:bg-slate-850/70 border-y border-slate-200 dark:border-slate-800 transition-theme">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-8 shadow-xl">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-8 shadow-xl">
           <div class="text-center max-w-xl mx-auto mb-10">
-            <h2 class="text-2xl sm:text-3xl font-extrabold font-heading dark:text-white">Estimate Custom Care Coverage</h2>
-            <p class="text-slate-650 dark:text-slate-350 text-sm mt-2">Adjust sliders and checkmarks to calculate immediate subscription costs customized to your layout.</p>
+            <h2 class="text-3xl sm:text-4xl font-black font-heading dark:text-white">Estimate Custom Care Coverage</h2>
+            <p class="text-slate-650 dark:text-slate-350 text-sm mt-2">Adjust sliders to calculate immediate subscription costs customized to your home appliance setup.</p>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
             <div class="space-y-6">
-              <!-- Slider 1 -->
               <div>
                 <div class="flex justify-between items-center mb-2">
                   <label class="text-sm font-semibold text-slate-700 dark:text-slate-350"><i class="fa-solid fa-wind mr-1.5 text-indigo-500"></i> Ceiling Fans</label>
-                  <span id="fans-count-display" class="bg-indigo-100 dark:bg-indigo-950/80 text-indigo-650 px-2 py-0.5 rounded font-bold text-xs">2 Covered</span>
+                  <span id="fans-count-display" class="bg-indigo-100 dark:bg-indigo-950/80 text-indigo-600 dark:text-indigo-400 px-2 py-0.5 rounded font-bold text-xs">2 Covered</span>
                 </div>
-                <input id="fans-slider" type="range" min="0" max="10" value="2" class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-indigo-650">
+                <input id="fans-slider" type="range" min="0" max="10" value="2" class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-indigo-600">
               </div>
 
-              <!-- Slider 2 -->
               <div>
                 <div class="flex justify-between items-center mb-2">
                   <label class="text-sm font-semibold text-slate-700 dark:text-slate-350"><i class="fa-solid fa-shirt mr-1.5 text-indigo-500"></i> Dry / Steam Irons</label>
-                  <span id="irons-count-display" class="bg-indigo-100 dark:bg-indigo-950/80 text-indigo-650 px-2 py-0.5 rounded font-bold text-xs">1 Covered</span>
+                  <span id="irons-count-display" class="bg-indigo-100 dark:bg-indigo-950/80 text-indigo-600 dark:text-indigo-400 px-2 py-0.5 rounded font-bold text-xs">1 Covered</span>
                 </div>
-                <input id="irons-slider" type="range" min="0" max="5" value="1" class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-indigo-650">
+                <input id="irons-slider" type="range" min="0" max="5" value="1" class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-indigo-600">
               </div>
 
-              <!-- Slider 3 -->
               <div>
                 <div class="flex justify-between items-center mb-2">
-                  <label class="text-sm font-semibold text-slate-700 dark:text-slate-350"><i class="fa-solid fa-blender mr-1.5 text-indigo-500"></i> Food Mixer Grinders</label>
-                  <span id="mixers-count-display" class="bg-indigo-100 dark:bg-indigo-950/80 text-indigo-650 px-2 py-0.5 rounded font-bold text-xs">1 Covered</span>
+                  <label class="text-sm font-semibold text-slate-700 dark:text-slate-350"><i class="fa-solid fa-blender mr-1.5 text-indigo-500"></i> Mixer Grinders</label>
+                  <span id="mixers-count-display" class="bg-indigo-100 dark:bg-indigo-950/80 text-indigo-600 dark:text-indigo-400 px-2 py-0.5 rounded font-bold text-xs">1 Covered</span>
                 </div>
-                <input id="mixers-slider" type="range" min="0" max="5" value="1" class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-indigo-650">
+                <input id="mixers-slider" type="range" min="0" max="5" value="1" class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-indigo-600">
               </div>
 
-              <!-- Switch for Geyser -->
-              <div class="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-850 rounded-xl border border-slate-250 dark:border-slate-800">
-                <div class="flex items-center space-x-3">
+              <div class="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-850 rounded-2xl border border-slate-200 dark:border-slate-800">
+                <div class="flex items-center space-x-3 rtl:space-x-reverse">
                   <div class="text-xl text-indigo-500"><i class="fa-solid fa-hot-tub-person"></i></div>
                   <div>
                     <h4 class="text-sm font-bold dark:text-white">Water Geyser Coverage</h4>
-                    <p class="text-xs text-slate-450">Includes standard descaling inspection</p>
+                    <p class="text-xs text-slate-400">Includes annual descaling check</p>
                   </div>
                 </div>
-                <label class="relative inline-flex items-center cursor-pointer">
-                  <input id="geyser-checkbox" type="checkbox" checked class="sr-only peer">
-                  <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-slate-600 peer-checked:bg-indigo-600"></div>
-                </label>
+                <input id="geyser-checkbox" type="checkbox" checked class="w-5 h-5 accent-indigo-600 rounded">
               </div>
             </div>
 
-            <!-- Price Output -->
-            <div class="bg-indigo-650 text-white rounded-2xl p-6 flex flex-col justify-between shadow-lg text-center relative overflow-hidden">
-              <div class="absolute -right-6 -top-6 w-24 h-24 bg-white/10 rounded-full"></div>
+            <div class="bg-indigo-900 text-white rounded-2xl p-6 flex flex-col justify-between shadow-lg text-center relative overflow-hidden">
               <div>
                 <span class="text-xs text-indigo-200 uppercase tracking-widest font-bold">Estimated Monthly Premium</span>
-                <p class="text-5xl font-extrabold mt-4" id="calculated-price">$29.00</p>
+                <p class="text-5xl font-black mt-4" id="calculated-price">$29.00</p>
                 <p class="text-xs text-indigo-200 mt-2">Adjust parameters to update estimator values.</p>
               </div>
               <div class="pt-6 border-t border-white/20 mt-6 space-y-2">
-                <div class="flex justify-between text-xs text-indigo-150">
+                <div class="flex justify-between text-xs text-indigo-200">
                   <span>Diagnostic Fee Coverage</span>
                   <span class="font-bold">100% Free</span>
                 </div>
-                <div class="flex justify-between text-xs text-indigo-150">
-                  <span>Standard Dispatch Queue</span>
-                  <span class="font-bold">Priority (Under 12h)</span>
+                <div class="flex justify-between text-xs text-indigo-200">
+                  <span>Dispatch Priority</span>
+                  <span class="font-bold">Under 12 Hours</span>
                 </div>
               </div>
             </div>
@@ -328,136 +366,86 @@
       </div>
     </section>
 
-    <!-- Section 4: B2B API Integration Showcase -->
-    <section class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-      <div class="space-y-6">
-        <span class="bg-indigo-100 dark:bg-indigo-950/80 border border-indigo-250 dark:border-indigo-900 text-indigo-600 dark:text-indigo-400 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider inline-block">Developers & B2B Client Focus</span>
-        <h2 class="text-3xl sm:text-4xl font-extrabold font-heading tracking-tight dark:text-white">Seamless Ticketing System API Integration</h2>
-        <p class="text-slate-650 dark:text-slate-350">Are you a landlord or commercial building manager? Integrate your internal booking app or ticketing software directly into the VoltFix automated dispatch pipeline.</p>
-        <ul class="space-y-3 text-sm text-slate-650 dark:text-slate-350">
-          <li><i class="fa-solid fa-code text-indigo-500 mr-2"></i> RESTful API endpoints for instant technician scheduling</li>
-          <li><i class="fa-solid fa-receipt text-indigo-500 mr-2"></i> Auto-invoice generation matching repair completion status</li>
-          <li><i class="fa-solid fa-chart-line text-indigo-500 mr-2"></i> Live updates tracking diagnostics, parts usage, and safety tests</li>
-        </ul>
-      </div>
-      <div class="bg-slate-900 text-slate-200 rounded-2xl p-6 font-mono text-xs border border-slate-800 shadow-2xl relative">
-        <div class="absolute top-3 right-3 flex space-x-1.5">
-          <span class="w-3 h-3 rounded-full bg-red-500"></span>
-          <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
-          <span class="w-3 h-3 rounded-full bg-green-500"></span>
-        </div>
-        <div class="border-b border-slate-800 pb-3 mb-4 text-slate-500">voltfix-api-request.js</div>
-        <pre class="overflow-x-auto"><code><span class="text-indigo-400">const</span> voltfix = require(<span class="text-emerald-400">'voltfix-repairs-sdk'</span>);
-
-<span class="text-indigo-400">const</span> client = <span class="text-indigo-400">new</span> voltfix.Client({
-  apiKey: <span class="text-emerald-400">'vf_live_38d92kd1a9s8d...'</span>
-});
-
-<span class="text-slate-500">// Programmatically schedule priority dispatch</span>
-<span class="text-indigo-400">await</span> client.dispatches.create({
-  propertyId: <span class="text-emerald-400">'prop_01hq82kd73'</span>,
-  appliance: <span class="text-emerald-400">'geyser_hotwater'</span>,
-  issue: <span class="text-emerald-400">'overheating_limit_tripped'</span>,
-  priorityLevel: <span class="text-emerald-400">'express_2h'</span>,
-  diagnosticWaiver: <span class="text-indigo-400">true</span>
-});
-
-console.log(<span class="text-emerald-400">'VoltFix Technician Dispatched! ETA: 45 min'</span>);</code></pre>
-      </div>
-    </section>
-
-    <!-- Section 5: Preventive ROI Stats -->
-    <section class="py-20 bg-indigo-900 text-white transition-theme relative overflow-hidden">
-      <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-indigo-500/20 via-transparent to-transparent"></div>
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        <div class="space-y-6">
-          <h2 class="text-3xl sm:text-4xl font-extrabold font-heading tracking-tight leading-tight">Preventive Maintenance ROI</h2>
-          <p class="text-indigo-200">
-            Fixing appliances before they burn out completely is the smartest way to manage your budget. Constant minor scale buildup inside geysers reduces heating efficiency and results in higher electric bills.
-          </p>
-          <div class="grid grid-cols-3 gap-4 pt-4 text-center">
-            <div class="bg-indigo-950/50 p-4 rounded-xl border border-indigo-500/20">
-              <span class="text-3xl font-extrabold block text-emerald-400">40%</span>
-              <span class="text-xs text-indigo-300">Reduction in Replacement Rates</span>
+    <!-- SECTION 4: Preventive Care ROI Showcase -->
+    <section class="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-slate-950 text-white rounded-3xl p-8 sm:p-12 relative overflow-hidden shadow-2xl grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-7 space-y-6">
+          <span class="bg-indigo-500/20 text-indigo-300 text-xs font-bold px-3.5 py-1.5 rounded-full border border-indigo-500/30 uppercase tracking-wider">Preventive Savings</span>
+          <h2 class="text-3xl sm:text-4xl font-black font-heading leading-tight">Save Money With Routine Diagnostic Protection</h2>
+          <p class="text-slate-350 text-sm leading-relaxed">Fixing minor electrical faults early extends your appliance's total operating lifespan by over 2x while lowering annual electricity power bills.</p>
+          <div class="grid grid-cols-3 gap-4 pt-2 text-center">
+            <div class="bg-slate-900 p-4 rounded-2xl border border-slate-800">
+              <span class="text-3xl font-black text-emerald-400 block font-heading">40%</span>
+              <span class="text-[11px] text-slate-400">Lower Replacement Costs</span>
             </div>
-            <div class="bg-indigo-950/50 p-4 rounded-xl border border-indigo-500/20">
-              <span class="text-3xl font-extrabold block text-emerald-400">$350</span>
-              <span class="text-xs text-indigo-300">Avg. Annual Utility Savings</span>
+            <div class="bg-slate-900 p-4 rounded-2xl border border-slate-800">
+              <span class="text-3xl font-black text-emerald-400 block font-heading">$350</span>
+              <span class="text-[11px] text-slate-400">Avg. Annual Power Savings</span>
             </div>
-            <div class="bg-indigo-950/50 p-4 rounded-xl border border-indigo-500/20">
-              <span class="text-3xl font-extrabold block text-emerald-400">2x</span>
-              <span class="text-xs text-indigo-300">Device Lifespan Extension</span>
+            <div class="bg-slate-900 p-4 rounded-2xl border border-slate-800">
+              <span class="text-3xl font-black text-emerald-400 block font-heading">2x</span>
+              <span class="text-[11px] text-slate-400">Lifespan Extension</span>
             </div>
           </div>
         </div>
-        <div class="relative flex justify-center lg:justify-end">
-          <div class="bg-slate-900/90 border border-indigo-500/20 p-6 rounded-2xl w-full max-w-md shadow-2xl relative space-y-6">
-            <div class="flex items-center space-x-3">
-              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
-              <span class="text-xs font-bold tracking-wider text-slate-400 uppercase">Case Study Result</span>
-            </div>
-            <p class="text-sm italic text-slate-300">
-              "Since enrolling our portfolio of 12 rental units in the Home Pro Care subscription, tenant complaints regarding water heater outages dropped to zero. We've saved thousands in outright replacements."
-            </p>
-            <div class="border-t border-slate-800 pt-4 flex justify-between items-center text-xs">
-              <span class="text-white font-bold">Cascade Property Management</span>
-              <span class="text-slate-500">12 Residential Units Covered</span>
-            </div>
-          </div>
+        <div class="lg:col-span-5 relative">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbuFs7MM9R1BQxnfQx31D2_3KaStFc5yP0jGWWy_L9QQ&s=10" alt="Preventive appliance testing" class="rounded-2xl object-cover h-72 w-full border border-slate-800 shadow-xl">
         </div>
       </div>
     </section>
 
-    <!-- Section 6: Subscription Registration Form -->
-    <section id="subscribe" class="py-20 bg-slate-50 dark:bg-slate-900 transition-theme">
+    <!-- SECTION 5: Instant Subscription Registration Form -->
+    <section id="subscribe" class="py-16 sm:py-24 bg-slate-100 dark:bg-slate-850 transition-theme">
       <div class="max-w-3xl mx-auto px-4 sm:px-6">
-        <div class="bg-white dark:bg-slate-850 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 p-8">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 p-6 sm:p-10">
           <div class="text-center max-w-md mx-auto mb-8">
-            <h2 class="text-2xl sm:text-3xl font-extrabold font-heading dark:text-white">Enroll in VoltFix Protection</h2>
-            <p class="text-slate-450 text-sm mt-2">Start your appliance protection plan today. No commitments, cancel anytime.</p>
+            <h2 class="text-3xl sm:text-4xl font-black font-heading dark:text-white">Enroll in VoltFix Protection</h2>
+            <p class="text-slate-650 dark:text-slate-350 text-sm mt-2">Start your appliance protection plan today. Cancel anytime.</p>
           </div>
 
           <form id="subscription-enrollment-form" class="space-y-6">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
-                <label class="block text-sm font-semibold text-slate-700 dark:text-slate-350 mb-2">Coverage Tier</label>
-                <select id="selected-tier" required class="w-full px-4 py-2 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-lg focus:ring-indigo-500 focus:outline-none dark:text-white">
+                <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2">Coverage Tier</label>
+                <select id="selected-tier" required class="w-full px-4 py-3 border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:outline-none dark:text-white text-sm font-medium">
                   <option value="starter">Starter Appliance Plan - $19/mo</option>
                   <option value="pro" selected>Home Pro Care Plan - $39/mo</option>
                   <option value="fleet">Commercial Fleet Plan - $99/mo</option>
                 </select>
               </div>
               <div>
-                <label class="block text-sm font-semibold text-slate-700 dark:text-slate-350 mb-2">Plan Start Date</label>
-                <input type="date" required class="w-full px-4 py-2 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-lg focus:ring-indigo-500 focus:outline-none dark:text-white">
+                <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2">Plan Start Date</label>
+                <input type="date" required class="w-full px-4 py-3 border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:outline-none dark:text-white text-sm font-medium">
               </div>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
-                <label class="block text-sm font-semibold text-slate-700 dark:text-slate-350 mb-2">First Name</label>
-                <input type="text" placeholder="John" required class="w-full px-4 py-2 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-lg focus:ring-indigo-500 focus:outline-none dark:text-white">
+                <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2">First Name</label>
+                <input type="text" placeholder="John" required class="w-full px-4 py-3 border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:outline-none dark:text-white text-sm font-medium">
               </div>
               <div>
-                <label class="block text-sm font-semibold text-slate-700 dark:text-slate-350 mb-2">Last Name</label>
-                <input type="text" placeholder="Doe" required class="w-full px-4 py-2 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-lg focus:ring-indigo-500 focus:outline-none dark:text-white">
+                <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2">Last Name</label>
+                <input type="text" placeholder="Doe" required class="w-full px-4 py-3 border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:outline-none dark:text-white text-sm font-medium">
               </div>
             </div>
 
             <div>
-              <label class="block text-sm font-semibold text-slate-700 dark:text-slate-350 mb-2">Email Address</label>
-              <input type="email" placeholder="john.doe@example.com" required class="w-full px-4 py-2 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-lg focus:ring-indigo-500 focus:outline-none dark:text-white">
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2">Email Address</label>
+              <input type="email" placeholder="john.doe@example.com" required class="w-full px-4 py-3 border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:outline-none dark:text-white text-sm font-medium">
             </div>
 
-            <button type="submit" class="w-full py-3 bg-indigo-650 hover:bg-indigo-600 text-white font-semibold rounded-lg shadow-md transition-all">Complete Subscription Enrollment</button>
+            <button type="submit" class="w-full py-4 bg-indigo-600 hover:bg-indigo-500 text-white font-black font-heading rounded-xl shadow-xl hover:shadow-indigo-600/30 transition-all text-base flex items-center justify-center gap-2">
+              <i class="fa-solid fa-shield-check"></i>
+              <span>Complete Subscription Enrollment</span>
+            </button>
           </form>
 
-          <!-- Success Notification (Simulated) -->
-          <div id="subscription-success" class="hidden mt-6 bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 p-4 rounded-lg flex items-center space-x-3">
-            <i class="fa-solid fa-circle-check text-xl"></i>
+          <div id="subscription-success" class="hidden mt-6 bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 p-6 rounded-2xl flex items-center space-x-4 rtl:space-x-reverse">
+            <div class="w-12 h-12 rounded-full bg-emerald-500 text-white flex items-center justify-center text-2xl shrink-0"><i class="fa-solid fa-check"></i></div>
             <div>
-              <h4 class="font-bold">Subscription Successfully Created!</h4>
-              <p class="text-xs font-medium">Thank you for joining. Check your email for onboarding details, active service tickets setup, and technician dispatch scheduling guidelines.</p>
+              <h4 class="font-bold text-lg">Subscription Successfully Created!</h4>
+              <p class="text-xs text-slate-650 dark:text-slate-350 mt-1">Thank you for joining. Check your email for onboarding details and technician dispatch guidelines.</p>
             </div>
           </div>
 
@@ -467,59 +455,60 @@ console.log(<span class="text-emerald-400">'VoltFix Technician Dispatched! ETA: 
 
   </main>
 
-  <!-- Footer (Common) -->
-  <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800 transition-theme">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="bg-slate-950 text-slate-400 py-16 border-t border-slate-800 transition-theme">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-10">
       <div class="space-y-4">
-        <a href="index.html" class="flex items-center space-x-2 group">
-          <div class="w-10 h-10 bg-indigo-600 text-white rounded-lg flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-          </div>
-          <span class="text-xl font-bold font-heading tracking-tight bg-gradient-to-r from-indigo-600 to-blue-500 bg-clip-text text-transparent dark:from-indigo-400 dark:to-blue-400">VoltFix</span>
+        <a href="index.html" class="flex items-center gap-3">
+          <div class="w-10 h-10 bg-indigo-600 text-white rounded-xl flex items-center justify-center shadow-lg font-bold"><i class="fa-solid fa-bolt text-lg"></i></div>
+          <span class="text-2xl font-black font-heading tracking-tight text-white">VoltFix</span>
         </a>
-        <p class="text-xs text-slate-500">Premium local electrical diagnostic and repair center for ceiling fans, irons, mixers, and geysers. Fast turnaround, transparent pricing.</p>
-        <div class="flex space-x-3 text-slate-500">
-          <a href="#" class="hover:text-indigo-400"><i class="fa-brands fa-facebook"></i></a>
-          <a href="#" class="hover:text-indigo-400"><i class="fa-brands fa-twitter"></i></a>
-          <a href="#" class="hover:text-indigo-400"><i class="fa-brands fa-instagram"></i></a>
-          <a href="#" class="hover:text-indigo-400"><i class="fa-brands fa-youtube"></i></a>
+        <p class="text-xs text-slate-400 leading-relaxed">Premium certified electrical appliance repair shop. Serving residential and commercial clients with 90-day guarantees and genuine original parts.</p>
+        <div class="flex gap-4 text-slate-400 text-lg">
+          <a href="#" class="hover:text-indigo-400 transition-colors" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+          <a href="#" class="hover:text-indigo-400 transition-colors" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#" class="hover:text-indigo-400 transition-colors" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="hover:text-indigo-400 transition-colors" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
         </div>
       </div>
+
       <div>
-        <h4 class="font-bold text-white mb-4 font-heading">Navigation</h4>
-        <ul class="space-y-2 text-sm">
-          <li><a href="index.html" class="hover:text-indigo-400">General Landing</a></li>
-          <li><a href="home2.html" class="hover:text-indigo-400">Subscription SaaS</a></li>
-          <li><a href="about.html" class="hover:text-indigo-400">About Us</a></li>
-          <li><a href="services.html" class="hover:text-indigo-400">Services</a></li>
-          <li><a href="guides.html" class="hover:text-indigo-400">Repair Guides</a></li>
-          <li><a href="contact.html" class="hover:text-indigo-400">Contact Us</a></li>
+        <h4 class="font-bold text-white mb-4 font-heading text-sm uppercase tracking-wider">Services</h4>
+        <ul class="space-y-2.5 text-xs">
+          <li><a href="services.html" class="hover:text-indigo-400 transition-colors">Washing Machine Repair</a></li>
+          <li><a href="services.html" class="hover:text-indigo-400 transition-colors">Refrigerator Gas & Cooling</a></li>
+          <li><a href="services.html" class="hover:text-indigo-400 transition-colors">Ceiling Fan Motor Rewinding</a></li>
+          <li><a href="services.html" class="hover:text-indigo-400 transition-colors">Steam Iron Thermostat Fix</a></li>
+          <li><a href="services.html" class="hover:text-indigo-400 transition-colors">Geyser Element Replacement</a></li>
         </ul>
       </div>
+
       <div>
-        <h4 class="font-bold text-white mb-4 font-heading">Services</h4>
-        <ul class="space-y-2 text-sm">
-          <li><a href="service-details.html" class="hover:text-indigo-400">Ceiling Fan Repair</a></li>
-          <li><a href="service-details.html" class="hover:text-indigo-400">Steam Iron Descaling</a></li>
-          <li><a href="service-details.html" class="hover:text-indigo-400">Mixer Motor Rewinding</a></li>
-          <li><a href="service-details.html" class="hover:text-indigo-400">Geyser Element Swap</a></li>
+        <h4 class="font-bold text-white mb-4 font-heading text-sm uppercase tracking-wider">Home Options</h4>
+        <ul class="space-y-2.5 text-xs">
+          <li><a href="index.html" class="hover:text-indigo-400 transition-colors">Home 1 (General Repair)</a></li>
+          <li><a href="home2.html" class="text-indigo-400 font-semibold">Home 2 (SaaS Care Plan)</a></li>
+          <li><a href="about.html" class="hover:text-indigo-400 transition-colors">About Us</a></li>
+          <li><a href="pricing.html" class="hover:text-indigo-400 transition-colors">Pricing Guide</a></li>
+          <li><a href="contact.html" class="hover:text-indigo-400 transition-colors">Emergency Contact</a></li>
         </ul>
       </div>
-      <div>
-        <h4 class="font-bold text-white mb-4 font-heading">Operating Hours</h4>
-        <ul class="space-y-2 text-xs">
-          <li>Monday - Friday: <span class="text-slate-300">8:00 AM - 7:00 PM</span></li>
-          <li>Saturday: <span class="text-slate-300">9:00 AM - 5:00 PM</span></li>
-          <li>Sunday: <span class="text-red-400 font-semibold">Closed for Safety Audits</span></li>
-          <li class="pt-2 text-slate-500"><i class="fa-solid fa-location-dot mr-1"></i> 101 Spark Ave, Suite B, Electropolis</li>
-        </ul>
+
+      <div class="space-y-3">
+        <h4 class="font-bold text-white mb-4 font-heading text-sm uppercase tracking-wider">Help & Emergency</h4>
+        <p class="text-xs text-slate-300 font-bold flex items-center gap-2"><i class="fa-solid fa-phone text-emerald-400"></i> Emergency: (800) 555-0199</p>
+        <p class="text-xs text-slate-400 flex items-center gap-2"><i class="fa-solid fa-envelope text-indigo-400"></i> service@voltfixrepairs.com</p>
+        <p class="text-xs text-slate-400 flex items-start gap-2"><i class="fa-solid fa-location-dot text-red-400 mt-0.5"></i> 101 Spark Ave, Suite B, Electropolis</p>
+        <p class="text-[11px] text-slate-500 pt-1">Mon–Fri: 8am–7pm | Sat: 9am–5pm</p>
       </div>
     </div>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-slate-800 mt-8 pt-8 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500">
-      <p>&copy; 2026 VoltFix Appliance Repairs. Crafted with electrical precision.</p>
-      <div class="flex space-x-4 mt-4 sm:mt-0">
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-slate-900 mt-12 pt-8 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500">
+      <p>&copy; 2026 VoltFix Electrical Appliance Repair Shop. All rights reserved.</p>
+      <div class="flex gap-6 mt-4 sm:mt-0">
         <a href="#" class="hover:text-indigo-400">Privacy Policy</a>
         <a href="#" class="hover:text-indigo-400">Terms of Service</a>
+        <a href="#" class="hover:text-indigo-400">90-Day Warranty Terms</a>
       </div>
     </div>
   </footer>
@@ -528,7 +517,6 @@ console.log(<span class="text-emerald-400">'VoltFix Technician Dispatched! ETA: 
   <script src="js/data.js"></script>
   <script src="js/app.js"></script>
   
-  <!-- Custom Coverage Calculator Scripts -->
   <script>
     const fansSlider = document.getElementById("fans-slider");
     const ironsSlider = document.getElementById("irons-slider");
@@ -550,37 +538,29 @@ console.log(<span class="text-emerald-400">'VoltFix Technician Dispatched! ETA: 
       ironsDisplay.textContent = `${irons} Covered`;
       mixersDisplay.textContent = `${mixers} Covered`;
 
-      // Cost calculation
       let monthlyCost = 0;
       monthlyCost += fans * 4.00;
       monthlyCost += irons * 3.00;
       monthlyCost += mixers * 5.00;
-      if (geyser) {
-        monthlyCost += 12.00;
-      }
-      
-      // Minimum base cost
-      if (monthlyCost > 0) {
-        monthlyCost += 5.00;
-      }
+      if (geyser) monthlyCost += 12.00;
+      if (monthlyCost > 0) monthlyCost += 5.00;
 
       calculatedPrice.textContent = `$${monthlyCost.toFixed(2)}`;
     }
 
-    fansSlider.addEventListener("input", calculateCost);
-    ironsSlider.addEventListener("input", calculateCost);
-    mixersSlider.addEventListener("input", calculateCost);
-    geyserCheckbox.addEventListener("change", calculateCost);
-
-    // Initial run
-    calculateCost();
-
-    // Select tier utility helper
-    function selectTier(tierName) {
-      document.getElementById("selected-tier").value = tierName;
+    if (fansSlider) {
+      fansSlider.addEventListener("input", calculateCost);
+      ironsSlider.addEventListener("input", calculateCost);
+      mixersSlider.addEventListener("input", calculateCost);
+      geyserCheckbox.addEventListener("change", calculateCost);
+      calculateCost();
     }
 
-    // Submit handler
+    function selectTier(tierName) {
+      const tierEl = document.getElementById("selected-tier");
+      if (tierEl) tierEl.value = tierName;
+    }
+
     document.getElementById("subscription-enrollment-form").addEventListener("submit", (e) => {
       e.preventDefault();
       document.getElementById("subscription-enrollment-form").classList.add("hidden");
@@ -589,3 +569,4 @@ console.log(<span class="text-emerald-400">'VoltFix Technician Dispatched! ETA: 
   </script>
 </body>
 </html>
+
