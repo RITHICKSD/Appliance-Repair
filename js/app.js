@@ -173,27 +173,45 @@ function initMobileHomeAccordion() {
 
 // 4. Mobile Menu Drawer Management
 function initMobileMenu() {
-  const openBtn = document.getElementById("mobile-menu-btn");
-  const closeBtn = document.getElementById("mobile-menu-close-btn");
   const overlay = document.getElementById("mobile-drawer-overlay");
-  const drawer = document.getElementById("mobile-drawer");
+  const drawer  = document.getElementById("mobile-drawer");
 
-  if (!openBtn || !drawer || !overlay) return;
+  if (!drawer || !overlay) return;
 
   function openMenu() {
     overlay.classList.remove("hidden");
     drawer.classList.remove("translate-x-full", "-translate-x-full");
     drawer.classList.add("translate-x-0");
+    document.body.style.overflow = "hidden"; // prevent background scroll
   }
 
   function closeMenu() {
     drawer.classList.remove("translate-x-0");
     const isRtl = document.documentElement.getAttribute("dir") === "rtl";
     drawer.classList.add(isRtl ? "-translate-x-full" : "translate-x-full");
-    setTimeout(() => overlay.classList.add("hidden"), 280);
+    setTimeout(() => {
+      overlay.classList.add("hidden");
+      document.body.style.overflow = "";
+    }, 280);
   }
 
-  openBtn.addEventListener("click", openMenu);
-  if (closeBtn) closeBtn.addEventListener("click", closeMenu);
-  overlay.addEventListener("click", closeMenu);
+  // Use event delegation on document so the click fires regardless of
+  // whether the button is inside a hidden/shown wrapper div.
+  document.addEventListener("click", (e) => {
+    // Open: any element with id="mobile-menu-btn"
+    if (e.target.closest("#mobile-menu-btn")) {
+      openMenu();
+      return;
+    }
+    // Close: close button or overlay backdrop
+    if (e.target.closest("#mobile-menu-close-btn") || e.target === overlay) {
+      closeMenu();
+      return;
+    }
+    // Close: mobile CTA book/subscribe button (navigates away)
+    if (e.target.closest("#mobile-book-btn")) {
+      closeMenu();
+    }
+  });
 }
+

@@ -59,7 +59,7 @@
       </a>
 
       <!-- Desktop Navigation -->
-      <nav class="hidden md:flex items-center space-x-7 rtl:space-x-reverse font-medium text-sm">
+      <nav class="hidden lg:flex items-center space-x-7 rtl:space-x-reverse font-medium text-sm whitespace-nowrap">
         <a href="index.html" class="text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Home</a>
         <a href="services.html" class="text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Services</a>
         <a href="index.html#how-it-works" class="text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">How It Works</a>
@@ -69,29 +69,31 @@
       </nav>
 
       <!-- Right Action CTAs -->
-      <div class="hidden sm:flex items-center space-x-4 rtl:space-x-reverse">
-        <a href="tel:18005550199" class="inline-flex items-center space-x-2 rtl:space-x-reverse text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 font-bold text-sm">
+      <div class="hidden lg:flex items-center gap-3 flex-shrink-0">
+        <a href="tel:18005550199" class="inline-flex items-center space-x-2 rtl:space-x-reverse text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 font-bold text-sm flex-shrink-0">
           <div class="w-9 h-9 rounded-full bg-indigo-50 dark:bg-slate-800 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
             <i class="fa-solid fa-phone"></i>
           </div>
-          <span class="hidden lg:inline">(800) 555-0199</span>
-        </a>
-        <a href="index.html#booking" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-lg shadow-md hover:shadow-indigo-500/25 transition-all text-sm flex items-center gap-2">
-          <i class="fa-solid fa-calendar-check"></i>
-          <span>Book Repair</span>
+          <span class="hidden xl:inline">(800) 555-0199</span>
         </a>
 
         <!-- Theme Toggle -->
-        <button id="theme-toggle" class="w-10 h-9 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-700 transition-all text-slate-700 dark:text-slate-200" title="Toggle Theme" aria-label="Toggle Theme">
+        <button id="theme-toggle" class="w-10 h-9 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-700 transition-all text-slate-700 dark:text-slate-200 flex-shrink-0" title="Toggle Theme" aria-label="Toggle Theme">
         </button>
         <!-- RTL Toggle -->
-        <button id="rtl-toggle" class="w-12 h-9 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-700 transition-all font-bold text-xs text-slate-700 dark:text-slate-200" title="Toggle Direction">
+        <button id="rtl-toggle" class="w-12 h-9 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-700 transition-all font-bold text-xs text-slate-700 dark:text-slate-200 flex-shrink-0" title="Toggle Direction">
           <span id="rtl-text">LTR</span>
         </button>
+        <a href="index.html#booking" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-lg shadow-md hover:shadow-indigo-500/25 transition-all text-sm flex items-center gap-2 whitespace-nowrap flex-shrink-0">
+          <i class="fa-solid fa-calendar-check"></i>
+          <span>Book Repair</span>
+        </a>
       </div>
 
-      <!-- Mobile Hamburger Button -->
-      <div class="flex items-center space-x-2 sm:hidden">
+      <!-- Mobile Actions (lg:hidden) -->
+      <div class="flex lg:hidden items-center gap-2">
+        <button id="mobile-theme-btn" class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-700 dark:text-slate-200 focus:outline-none" title="Toggle Theme" aria-label="Toggle Theme">
+        </button>
         <button id="mobile-menu-btn" class="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-slate-800 flex items-center justify-center text-indigo-600 dark:text-indigo-400 focus:outline-none" aria-label="Open Menu">
           <i class="fa-solid fa-bars text-xl"></i>
         </button>
@@ -99,45 +101,68 @@
     </div>
   </header>
 
-  <!-- Mobile Drawer Menu -->
-  <div id="mobile-drawer-overlay" class="hidden fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50"></div>
-  <div id="mobile-drawer" class="fixed top-0 right-0 bottom-0 w-80 bg-white dark:bg-slate-900 max-w-full shadow-2xl z-50 transform translate-x-full transition-transform duration-300 border-l border-slate-200 dark:border-slate-800 p-6 flex flex-col justify-between">
-    <div>
-      <div class="flex items-center justify-between pb-6 border-b border-slate-200 dark:border-slate-800">
-        <span class="text-lg font-bold font-heading text-indigo-600 dark:text-indigo-400">VoltFix Nav Menu</span>
-        <button id="mobile-menu-close-btn" class="w-8 h-8 rounded-full flex items-center justify-center bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700">
-          <i class="fa-solid fa-xmark text-slate-650 dark:text-slate-350"></i>
+  <!-- ===================== MOBILE DRAWER (mobile only) ===================== -->
+  <div id="mobile-drawer-overlay" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[60]"></div>
+  <div id="mobile-drawer" class="fixed top-0 right-0 bottom-0 w-80 max-w-full bg-white dark:bg-slate-900 shadow-2xl z-[70] transform translate-x-full transition-transform duration-300 border-l border-slate-200 dark:border-slate-800 flex flex-col">
+    <!-- Drawer Header -->
+    <div class="flex items-center justify-between p-6 border-b border-slate-200 dark:border-slate-800">
+      <div class="flex items-center gap-2">
+        <div class="w-9 h-9 bg-indigo-600 text-white rounded-lg flex items-center justify-center">
+          <i class="fa-solid fa-bolt"></i>
+        </div>
+        <span class="text-xl font-bold font-heading text-indigo-600 dark:text-indigo-400">VoltFix</span>
+      </div>
+      <button id="mobile-menu-close-btn" class="w-8 h-8 rounded-full flex items-center justify-center bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors" aria-label="Close Menu">
+        <i class="fa-solid fa-xmark text-slate-600 dark:text-slate-300"></i>
+      </button>
+    </div>
+
+    <!-- Drawer Nav Links -->
+    <div class="flex flex-col flex-grow overflow-y-auto p-6 gap-1">
+      <!-- Home Accordion -->
+      <div>
+        <button id="mobile-home-acc-btn" class="flex items-center justify-between w-full text-left py-3 px-3 rounded-lg font-medium text-slate-700 dark:text-slate-200 hover:text-indigo-600 hover:bg-indigo-50 dark:hover:bg-slate-800 focus:outline-none transition-colors">
+          <span>Home</span>
+          <i id="mobile-home-acc-icon" class="fa-solid fa-chevron-right text-xs transition-transform duration-200"></i>
+        </button>
+        <div id="mobile-home-acc-sub" class="hidden flex-col pl-4 mt-1 space-y-1 border-l-2 border-indigo-400 ml-3">
+          <a href="index.html" class="py-2 px-2 text-sm text-slate-600 dark:text-slate-400 hover:text-indigo-600 block rounded hover:bg-indigo-50 dark:hover:bg-slate-800">Home 1 (General Repair)</a>
+          <a href="home2.html" class="py-2 px-2 text-sm text-slate-600 dark:text-slate-400 hover:text-indigo-600 block rounded hover:bg-slate-50 dark:hover:bg-slate-800">Home 2 (SaaS Care Plan)</a>
+        </div>
+      </div>
+      <a href="about.html" class="py-3 px-3 rounded-lg text-slate-700 dark:text-slate-200 hover:text-indigo-600 hover:bg-indigo-50 dark:hover:bg-slate-800 font-medium transition-colors">About Us</a>
+      <a href="services.html" class="py-3 px-3 rounded-lg text-slate-700 dark:text-slate-200 hover:text-indigo-600 hover:bg-indigo-50 dark:hover:bg-slate-800 font-medium transition-colors">Services</a>
+      <a href="pricing.html" class="py-3 px-3 rounded-lg text-slate-700 dark:text-slate-200 hover:text-indigo-600 hover:bg-indigo-50 dark:hover:bg-slate-800 font-medium transition-colors">Pricing</a>
+      <a href="guides.html" class="py-3 px-3 rounded-lg text-slate-700 dark:text-slate-200 hover:text-indigo-600 hover:bg-indigo-50 dark:hover:bg-slate-800 font-medium transition-colors">Repair Guides</a>
+      <a href="contact.html" class="py-3 px-3 rounded-lg font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 transition-colors">Contact Us</a>
+
+      <!-- Mobile Theme & RTL toggle -->
+      <div class="mt-4 pt-4 border-t border-slate-200 dark:border-slate-800 space-y-2">
+        <button class="theme-toggle-btn w-full py-2.5 px-4 bg-slate-100 dark:bg-slate-800 rounded-lg font-bold text-sm text-slate-700 dark:text-slate-200 flex items-center justify-between hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+          <span class="flex items-center gap-2">
+            <span class="theme-toggle-icon flex items-center"></span>
+            <span>Theme Mode</span>
+          </span>
+          <span class="text-xs font-semibold px-2 py-0.5 rounded bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 theme-toggle-text">Light</span>
+        </button>
+        <button id="mobile-rtl-toggle" class="w-full py-2.5 px-4 bg-slate-100 dark:bg-slate-800 rounded-lg font-bold text-sm text-slate-700 dark:text-slate-200 flex items-center justify-between hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+          <span class="flex items-center gap-2">
+            <i class="fa-solid fa-language text-indigo-500"></i>
+            <span>Direction</span>
+          </span>
+          <span id="mobile-rtl-text" class="text-xs font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700">LTR</span>
         </button>
       </div>
-      <div class="flex flex-col py-6 space-y-2 font-medium">
-        <!-- Home Accordion -->
-        <div>
-          <button id="mobile-home-acc-btn" class="flex items-center justify-between w-full text-left text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 py-2 min-h-0 bg-transparent border-0 p-0 focus:outline-none">
-            <span>Home</span>
-            <i id="mobile-home-acc-icon" class="fa-solid fa-chevron-right text-xs transition-transform duration-200"></i>
-          </button>
-          <div id="mobile-home-acc-sub" class="hidden flex-col pl-3 mt-1 pb-1 space-y-1 border-l-2 border-slate-200 dark:border-slate-700">
-            <a href="index.html" class="text-sm text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 py-1.5 block">Home 1</a>
-            <a href="home2.html" class="text-sm text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 py-1.5 block">Home 2</a>
-          </div>
-        </div>
-        <a href="about.html" class="text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 py-2">About Us</a>
-        <a href="services.html" class="text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 py-2">Our Services</a>
-        <a href="pricing.html" class="text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 py-2">Pricing</a>
-        <a href="guides.html" class="text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 py-2">Repair Guides</a>
-        <a href="contact.html" class="text-indigo-600 dark:text-indigo-400 font-semibold py-2">Contact Us</a>
-        <!-- Appearance Toggles -->
-        <div class="flex items-center gap-3 pt-3 mt-1 border-t border-slate-200 dark:border-slate-800">
-          <button id="mobile-theme-btn" onclick="document.getElementById('theme-toggle').click()" class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-700 transition-theme min-h-0" title="Toggle Theme">
-          </button>
-          <button onclick="document.getElementById('rtl-toggle').click()" class="w-12 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-700 transition-theme font-bold text-xs text-slate-700 dark:text-slate-200 min-h-0">
-            <span id="mobile-rtl-text">LTR</span>
-          </button>
-        </div>
-      </div>
     </div>
-    <div class="pt-6 border-t border-slate-200 dark:border-slate-800">
-      <p class="text-xs text-slate-400 text-center">&copy; 2026 VoltFix Repairs. All rights reserved.</p>
+
+    <!-- Drawer Footer CTAs -->
+    <div class="p-6 border-t border-slate-200 dark:border-slate-800 space-y-3">
+      <a href="tel:18005550199" class="w-full py-3 bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-white font-bold rounded-lg flex items-center justify-center gap-2 text-sm hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+        <i class="fa-solid fa-phone text-indigo-600 dark:text-indigo-400"></i> (800) 555-0199
+      </a>
+      <a href="index.html#booking" id="mobile-book-btn" class="w-full py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-lg flex items-center justify-center gap-2 text-sm transition-colors">
+        <i class="fa-solid fa-calendar-check"></i> Book Repair Now
+      </a>
     </div>
   </div>
 
